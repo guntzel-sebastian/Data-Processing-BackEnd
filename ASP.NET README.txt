@@ -126,7 +126,7 @@ SCAFFOLD CONTROLLER ---
 
 This essentially makes a bunch of code for you, including GET and POST endpoints.
 
-Use command: 
+Use the command: 
 "
 dotnet aspnet-codegenerator controller -name {name}ItemsController -async -api -m {name}Item -dc {name}Context -outDir Controllers
 "
@@ -134,7 +134,7 @@ dotnet aspnet-codegenerator controller -name {name}ItemsController -async -api -
 
 POTENTIAL UPDATE ---
 
-you may need to update the return statement of Post{name}Item.
+You may need to update the return statement of Post{name}Item.
 
 from:
 
@@ -148,7 +148,7 @@ to:
 return CreatedAtAction(nameof(Get{name}Item), new { id = {name}Item.Id }, {name}Item);
 "
 
-the significance of this is not known.
+The significance of this is not known.
 
 
 
