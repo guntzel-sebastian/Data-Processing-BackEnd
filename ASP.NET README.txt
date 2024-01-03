@@ -1,8 +1,8 @@
 --- REQUIRED ---
 
 dotnet 8(.0.100)
-vscode
-c# for vscode (duh)
+VSCode
+C# for VSCode plugin (duh)
 
 
 
@@ -10,7 +10,7 @@ c# for vscode (duh)
 --- NEW PROJECT SETUP ---
 
 
-use commands in console (any):
+Use commands in console (any):
 
 "
 dotnet new webapi --use-controllers -o {ApiName}
@@ -19,15 +19,17 @@ dotnet add package Microsoft.EntityFrameworkCore.InMemory
 code -r ../{ApiName}
 "
 
+All commands from this point are run inside the /{ApiName} directory
 
-trust certificates using command in console:
+
+Trust certificates using command in console:
 
 "
 dotnet dev-certs https --trust
 "
 
 
-in order to scaffold the controller (only neccesary if you're making an endpoint), you need to run the following:
+In order to scaffold the controller (only neccesary if you're making an endpoint), you need to run the following:
 
 "
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -39,7 +41,7 @@ dotnet tool update -g dotnet-aspnet-codegenerator
 "
 
 
---- RUN COMMAND ---
+--- RUN APPLICATION ---
 
 "
 dotnet run --launch-profile https
@@ -58,11 +60,11 @@ go to "{link}/swagger" to get to the dev environment.
 
 MODEL CLASS ---
 
-go to models folder
-add {name}Item.cs file
-add code for an container class.
+Go to the "models" folder
+Add {name}Item.cs file
+Add code for an container class.
 
-example code is:
+An example of what the code may look like is:
 "
 namespace {name}.Models;
 
@@ -76,10 +78,10 @@ public class {name}
 
 DATABASE CONTEXT --- 
 
-go to Models folder
-add new file {name}Context.cs
+Go to Models folder
+Add a new file named {name}Context.cs
 
-add something like the following code:
+Add something like the following code to the file:
 
 "
 using Microsoft.EntityFrameworkCore;
@@ -100,19 +102,19 @@ public class TodoContext : DbContext
 
 REGISTERING DATABASE CONTEXT ---
 
-in order to register the context, go to Program.cs
+In order to register the context, go to Program.cs
 
-if not yet present at the top, add:
+If not yet present at the top, add:
 "
 using Microsoft.EntityFrameworkCore;
 "
 
-now add:
+Now add:
 "
 using TodoApi.Models;
 "
 
-now. the next step is to add the database connection. if you wish to add a false/test solution without database. use:
+The next step is to add the database connection. if you wish to add a false/test solution without database. use:
 
 "
 builder.Services.AddDbContext<{name}Context>(opt =>
@@ -122,9 +124,9 @@ builder.Services.AddDbContext<{name}Context>(opt =>
 
 SCAFFOLD CONTROLLER ---
 
-this essentially makes a bunch of code for you, including GET and POST endpoints.
+This essentially makes a bunch of code for you, including GET and POST endpoints.
 
-use command: 
+Use command: 
 "
 dotnet aspnet-codegenerator controller -name {name}ItemsController -async -api -m {name}Item -dc {name}Context -outDir Controllers
 "
