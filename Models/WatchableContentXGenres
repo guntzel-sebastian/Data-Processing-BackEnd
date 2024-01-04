@@ -1,0 +1,10 @@
+namespace NetflixAPI.Models;
+
+public class WatchableContentXGenres
+{
+    public long WatchableContentId { get; set; }
+    public long GenreId { get; set; }
+
+    public virtual Genre Genre { get; set; }
+    public virtual WatchableContent WatchableContent { get; set; }
+}

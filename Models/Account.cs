@@ -11,8 +11,6 @@ public class Account
     public required HashSet<Account> InviteList { get; set; }
     public required Language Language { get; set; }
     public required Subscription Subscription { get; set; }
-    public required HashSet<Profile> Profiles { get; set; }
-    public required HashSet<WatchableContent> Watchlist { get; set; }
-    public required Dictionary<WatchableContent, List<DateTime>> WatchHistory { get; set; }
+    public virtual HashSet<Profile> Profiles { get; set; }
     public bool Blocked { get; set; }
 }
