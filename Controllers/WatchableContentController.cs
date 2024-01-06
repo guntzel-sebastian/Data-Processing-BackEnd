@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.WatchableContent_1.Add(watchableContent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetWatchableContent", new { id = watchableContent.Id }, watchableContent);
+            return CreatedAtAction(nameof(GetWatchableContent), new { id = watchableContent.Id }, watchableContent);
         }
 
         // DELETE: api/WatchableContent/5

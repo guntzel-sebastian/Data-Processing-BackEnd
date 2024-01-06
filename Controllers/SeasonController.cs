@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.Season_1.Add(season);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSeason", new { id = season.Id }, season);
+            return CreatedAtAction(nameof(GetSeason), new { id = season.Id }, season);
         }
 
         // DELETE: api/Season/5

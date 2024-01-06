@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.SubtitleContent_1.Add(subtitleContent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSubtitleContent", new { id = subtitleContent.Id }, subtitleContent);
+            return CreatedAtAction(nameof(GetSubtitleContent), new { id = subtitleContent.Id }, subtitleContent);
         }
 
         // DELETE: api/SubtitleContent/5
