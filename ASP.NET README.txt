@@ -1,0 +1,158 @@
+--- REQUIRED ---
+
+dotnet 8(.0.100)
+VSCode
+C# for VSCode plugin (duh)
+
+
+
+
+--- NEW PROJECT SETUP ---
+
+
+Use commands in console (any):
+
+"
+dotnet new webapi --use-controllers -o {ApiName}
+cd {ApiName}
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+code -r ../{ApiName}
+"
+
+All commands from this point are run inside the /{ApiName} directory
+
+
+Trust certificates using command in console:
+
+"
+dotnet dev-certs https --trust
+"
+
+
+In order to scaffold the controller (only neccesary if you're making an endpoint), you need to run the following:
+
+"
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet tool uninstall -g dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
+"
+
+
+--- RUN APPLICATION ---
+
+"
+dotnet run --launch-profile https
+"
+
+go to "{link}/swagger" to get to the dev environment.
+
+
+
+--- ADD NEW ENDPOINT ---
+
+(for the following section, all {name} is the same word and does not change between steps for clarity.)
+
+(this example is meant for completely new models from 0, some steps may be skipped/ modified)
+
+
+MODEL CLASS ---
+
+Go to the "models" folder
+Add {name}Item.cs file
+Add code for an container class.
+
+An example of what the code may look like is:
+"
+namespace {name}.Models;
+
+public class {name}
+{
+    public long Id { get; set; }
+    public string? Name { get; set; }
+    public bool somethingElse { get; set; }
+}
+"
+
+DATABASE CONTEXT --- 
+
+Go to Models folder
+Add a new file named {name}Context.cs
+
+Add something like the following code to the file:
+
+"
+using Microsoft.EntityFrameworkCore;
+
+namespace {name}.Models;
+
+public class TodoContext : DbContext
+{
+    public {name}Context(DbContextOptions<TodoContext> options)
+        : base(options)
+    {
+    }
+
+    public DbSet<TodoItem> {name}Items { get; set; } = null!;
+}
+"
+
+
+REGISTERING DATABASE CONTEXT ---
+
+In order to register the context, go to Program.cs
+
+If not yet present at the top, add:
+"
+using Microsoft.EntityFrameworkCore;
+"
+
+Now add:
+"
+using TodoApi.Models;
+"
+
+The next step is to add the database connection. if you wish to add a false/test solution without database. use:
+
+"
+builder.Services.AddDbContext<{name}Context>(opt =>
+    opt.UseInMemoryDatabase("{digitalTableName}"));
+"
+
+
+SCAFFOLD CONTROLLER ---
+
+This essentially makes a bunch of code for you, including GET and POST endpoints.
+
+Use the command: 
+"
+dotnet aspnet-codegenerator controller -name {name}ItemsController -async -api -m {name}Item -dc {name}Context -outDir Controllers
+"
+
+
+POTENTIAL UPDATE ---
+
+You may need to update the return statement of Post{name}Item.
+
+from:
+
+"
+return CreatedAtAction("Get{name}Item", new { id = {name}Item.Id }, {name}Item);
+"
+
+to:
+
+"
+return CreatedAtAction(nameof(Get{name}Item), new { id = {name}Item.Id }, {name}Item);
+"
+
+The significance of this is not known.
+
+
+
+
+--- SOURCE ---
+
+https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0&tabs=visual-studio
