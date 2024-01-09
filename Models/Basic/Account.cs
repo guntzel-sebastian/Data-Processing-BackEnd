@@ -1,3 +1,6 @@
+
+using System.Collections;
+
 namespace NetflixAPI.Models;
 
 public class Account
@@ -11,4 +14,5 @@ public class Account
     public required Subscription Subscription { get; set; }
     public virtual HashSet<Profile>? Profiles { get; set; }
     public bool Blocked { get; set; }
+
 }
