@@ -1,17 +1,11 @@
-public partial class Subscription
+namespace NetflixAPI.Models;
+
+public class Subscription
 {
-    public Subscription()
-    {
-        SubscriptionXUsers = new HashSet<SubscriptionXUser>();
-        SubscriptionXQualityAllowed = new HashSet<SubscriptionXQualityAllowed>();
-    }
-
-    public long SubscriptionId {get; set;}
-    public string SubscriptionName {get; set;}
-
-    public float SubscriptionCost {get; set;}
-
-    public virtual ICollection<SubscriptionXUser> SubscriptionXUsers {get; set;}
-
-    public virtual ICollection<SubscriptionXQualityAllowed> SubscriptionXQualityAlloweds {get; set;}
+    public long Id { get; set; }
+    public required string Description { get; set; }
+    public required Price Price { get; set; }
+    public required HashSet<Quality> QualitySelection { get; set; }
+    public required DateTime StartDate { get; set; }
+    public required int Duration { get; set; }
 }

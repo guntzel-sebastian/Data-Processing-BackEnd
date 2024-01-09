@@ -1,14 +1,10 @@
-public partial class Quality
+namespace NetflixAPI.Models;
+
+public class Quality
 {
-    public Quality()
-    {
-        SubscriptionXQualityAlloweds = new HashSet<SubscriptionXQualityAllowed>();
-        EpisodeXQualityAvailables = new HashSet<EpisodeXQualityAvailable>();
-    }
+    public long Id { get; set; }
+    public required string QualityName { get; set; }
 
-    public long QualityId {get; set;}
-    public string qualityName {get; set;}
+    public virtual required ICollection<EpisodeXQualityAvailable> EpisodeQuality { get; set; }
 
-    public virtual ICollection<SubscriptionXQualityAllowed> SubscriptionXQualityAlloweds {get; set;}
-    public virtual ICollection<EpisodeXQualityAvailable> EpisodeXQualityAvailables {get; set;}
 }

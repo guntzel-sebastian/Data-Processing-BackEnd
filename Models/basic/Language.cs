@@ -1,14 +1,7 @@
-public partial class Language
+namespace NetflixAPI.Models;
+
+public class Language
 {
-    public class Language()
-    {
-        TextItemXLanguages = new HashSet<TextItemXLanguage>();
-    }
-
-    public long LanguageId {get; set;}
-    public string Language {get; set;}
-
-    public User? User {get; set;} // likely incorrect
-
-    public virtual ICollection<TextItemXLanguage> TextItemXLanguages {get; set;}
+    public long Id { get; set; }
+    public required string Lang { get; set; }
 }
