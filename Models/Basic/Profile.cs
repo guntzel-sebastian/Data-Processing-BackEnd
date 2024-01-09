@@ -11,7 +11,5 @@ public class Profile
     public required string Address { get; set; }
 
     public virtual required Account Account { get; set; }
-    public virtual WantToWatch WantToWatch { get; set; }
-    public virtual ContentSession ContentSession { get; set; 
-    public virtual SubtitleSettings SubtitleSettings { get; set; }
+    // public virtual SubtitleSettings SubtitleSettings { get; set; }
 }

@@ -7,6 +7,6 @@ public class SubtitleContent
     public long LanguageId { get; set; }
     public required string SubtitleLocation { get; set; }
 
-    public virtual Episode Episode { get; set; }
-    public virtual Language Language { get; set; }
+    public virtual required Episode Episode { get; set; }
+    public virtual required Language Language { get; set; }
 }
