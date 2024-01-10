@@ -1,9 +1,14 @@
 namespace NetflixAPI.Models;
 
-public class Preferences
+public partial class Preferences
 {
+
+    public Preferences()
+    {
+    }
+
     public long Id { get; set; }
-    public required HashSet<Genre> Genres { get; set; }
-    public required HashSet<ContentType> ContentTypes { get; set; }
-    public required HashSet<Classification> Classification { get; set; }
+    public required HashSet<long> Genres { get; set; }
+    public required HashSet<long> ContentTypes { get; set; }
+    public required HashSet<long> Classifications { get; set; }
 }

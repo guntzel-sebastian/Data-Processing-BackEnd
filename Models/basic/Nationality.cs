@@ -1,7 +1,12 @@
 namespace NetflixAPI.Models;
 
-public class Nationality
+public partial class Nationality
 {
+
+    public Nationality()
+    {
+    }
+
     public long Id { get; set; }
     public required string Nation { get; set; }
 }

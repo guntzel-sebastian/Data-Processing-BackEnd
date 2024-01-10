@@ -1,41 +1,23 @@
+namespace NetflixAPI.Models;
+
 public partial class Profile
 {
     public Profile()
     {
-        SubtitleSettings = new HashSet<SubtitleSettings>();
-
-        ProfileXContentTypePreferences = new HashSet<ProfileXContentTypePreference>();
-
-        ProfileXGenrePreferences = new HashSet<ProfileXGenrePreference>();
-
-        ProfileXClassificationPreferences = new HashSet<ProfileXClassificationPreference>();
-
-        WantToWatch = new HashSet<WantToWatch>();
-
-        ContentSession = new HashSet<ContentSession>();
     }
 
     public long ProfileId {get; set;}
-
-    public string Name {get; set;}
-
-    public string Photo {get; set;}
-
-    public string DateOfBirth {get; set;} // made string for now to avoid potential server conflicts
-
     public long UserId {get; set;}
+    public required string Name {get; set;}
+    public string? Photo {get; set;}
+    public required string DateOfBirth {get; set;} // made string for now to avoid potential server conflicts
 
-    public virtual ICollection<SubtitleSettings> SubtitleSettings {get; set;}
-
-    public virtual ICollection<ProfileXContentTypePreference> ProfileXContentTypePreferences {get; set;}
-
-    public virtual ICollection<ProfileXGenrePreference> ProfileXGenrePreferences {get; set;}
-
-    public virtual ICollection<ProfileXClassificationPreference> ProfileXClassificationPreferences {get; set;}
-
-    public virtual ICollection<WantToWatch> WantToWatch {get; set;}
-
-    public virtual ICollection<ContentSession> ContentSession {get; set;}
+    public ICollection<long>? SubtitleSettings {get; set;}
+    public ICollection<long>? ContentTypePreferences {get; set;}
+    public ICollection<long>? GenrePreferences {get; set;}
+    public ICollection<long>? ClassificationPreferences {get; set;}
+    public ICollection<long>? WantToWatch {get; set;}
+    public ICollection<long>? ContentSession {get; set;}
 
     
 }

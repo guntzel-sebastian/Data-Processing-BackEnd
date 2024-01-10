@@ -1,12 +1,17 @@
 namespace NetflixAPI.Models;
 
-public class Season
+public partial class Season
 {
+
+    public Season()
+    {
+    }
+
     public long Id { get; set; }
     public long ContentId { get; set; }
     public required string Director { get; set; }
-    public required DateTime ReleaseDate { get; set; }
+    public required string ReleaseDate { get; set; }
 
-    public virtual required HashSet<Episode> Episodes { get; set; }
-    public virtual required WatchableContent WatchableContent { get; set; }
+    public virtual HashSet<long>? Episodes { get; set; }
+    
 }

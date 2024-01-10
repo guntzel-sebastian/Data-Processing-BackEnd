@@ -1,12 +1,13 @@
+namespace NetflixAPI.Models;
+
 public partial class TextItem
 {
     public TextItem()
     {
-        TextItemXLanguages = new HashSet<TextItemXLanguage>();
     }
 
-    public long TextItemId {get; set;}
-    public string OnPageTextId {get; set;}
+    public long Id {get; set;}
+    public required string OnPageTextId {get; set;}
 
-    public virtual ICollection<TextItemXLanguage> TextItemXLanguages {get; set;}
+    public virtual required ICollection<long> Languages {get; set;}
 }

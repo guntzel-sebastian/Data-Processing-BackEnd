@@ -1,12 +1,14 @@
+namespace NetflixAPI.Models;
+
 public partial class FailedLoginAttempt
 {
     public FailedLoginAttempt()
     {
     }
 
+    public long Id;
     public long UserId;
-    public string date; // should be datetime probably
-    public string time; // should be merged with datetime
+    public required string Date; // should be datetime probably
+    public required string Time; // should be merged with datetime
 
-    public virtual User User {get; set;}
 }
