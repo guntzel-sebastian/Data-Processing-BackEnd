@@ -7,10 +7,7 @@ public class Episode
     public long SeasonId { get; set; }
     public required string EpisodeName { get; set; }
     public int ContentIndex { get; set; }
-    public required TimeSpan Length { get; set; }
+    public required int Length { get; set; }
 
-    public virtual HashSet<EpisodeXQualityAvailable>? EpisodeQuality { get; set; }
-    public virtual HashSet<SubtitleContent>? Subtitles { get; set; }
-    public virtual required WatchableContent WatchableContent { get; set; }
-    public virtual Season? Season { get; set; }
+    
 }
