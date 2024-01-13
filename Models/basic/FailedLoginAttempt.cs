@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace NetflixAPI.Models;
 
 public partial class FailedLoginAttempt
@@ -6,9 +8,11 @@ public partial class FailedLoginAttempt
     {
     }
 
-    public long Id;
-    public long UserId;
-    public required string Date; // should be datetime probably
-    public required string Time; // should be merged with datetime
+    [Key]
+    public long Id {get; set;}
+
+    public long UserId {get; set;}
+    public required string Date {get; set;} // should be datetime probably
+    public required string Time {get; set;} // should be merged with datetime
 
 }
