@@ -1,9 +1,9 @@
 namespace NetflixAPI.Models;
 
-public partial class Preferences
+public partial class Preference
 {
 
-    public Preferences()
+    public Preference()
     {
     }
 
