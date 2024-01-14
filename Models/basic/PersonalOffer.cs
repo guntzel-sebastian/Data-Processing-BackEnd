@@ -8,5 +8,5 @@ public class PersonalOffer
     }
 
     public long Id { get; set; }
-    public required HashSet<long> Content { get; set; }
+    public required IList<long> Content { get; set; }
 }

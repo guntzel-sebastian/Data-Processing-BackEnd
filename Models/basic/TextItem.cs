@@ -9,5 +9,5 @@ public partial class TextItem
     public long Id {get; set;}
     public required string OnPageTextId {get; set;}
 
-    public virtual required ICollection<long> Languages {get; set;}
+    public virtual required IList<long> Languages {get; set;}
 }

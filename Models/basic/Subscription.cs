@@ -11,5 +11,5 @@ public partial class Subscription
 
     public required float SubscriptionCost {get; set;}
 
-    public virtual required ICollection<long> QualitiesAllowed {get; set;}
+    public virtual required IList<long> QualitiesAllowed {get; set;}
 }

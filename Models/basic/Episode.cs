@@ -14,7 +14,7 @@ public partial class Episode
     public int ContentIndex { get; set; }
     public required int Length { get; set; }
 
-    public virtual HashSet<long>? EpisodeQuality { get; set; }
-    public virtual HashSet<long>? Subtitles { get; set; }
+    public virtual IList<long>? EpisodeQuality { get; set; }
+    public virtual IList<long>? Subtitles { get; set; }
    
 }

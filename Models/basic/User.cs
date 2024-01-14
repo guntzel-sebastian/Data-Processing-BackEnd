@@ -13,9 +13,9 @@ public partial class User
     public string? BlockedUntil {get; set;} // string, should probably be datetime (to prevent problems)
     public long SubscriptionId {get; set;}
     public required long LanguageId {get; set;}
-    public virtual ICollection<long>? Profiles {get; set;}
-    public virtual ICollection<long>? FailedLoginAttempts {get; set;}
-    public virtual ICollection<long>? UserHasInvited {get; set;}
+    public virtual IList<long>? Profiles {get; set;}
+    public virtual IList<long>? FailedLoginAttempts {get; set;}
+    public virtual IList<long>? UserHasInvited {get; set;}
     public virtual required bool UserHasBeenInvited {get; set;} // should probably not be a Collection (diagram error)
 
 }
