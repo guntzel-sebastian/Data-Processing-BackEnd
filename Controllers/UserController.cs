@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -75,12 +76,23 @@ namespace NetflixAPI.Controllers
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<UserRegister>> RegisterUser(UserRegister userRegister)
         {
+
+            var user = new User
+            {
+                EmailAddress = userRegister.EmailAddress,
+                PasswordHash = userRegister.Password,
+                UserHasBeenInvited = userRegister.UserHasBeenInvited
+            };
+
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            return CreatedAtAction(
+                nameof(GetUser),
+                new { id = user.Id },
+                UserToRegister(user));
         }
 
         // DELETE: api/User/5
@@ -103,5 +115,13 @@ namespace NetflixAPI.Controllers
         {
             return _context.User.Any(e => e.Id == id);
         }
+
+        private static UserRegister UserToRegister(User user) =>
+            new UserRegister
+            {
+                EmailAddress = user.EmailAddress,
+                Password = user.PasswordHash,
+                UserHasBeenInvited = user.UserHasBeenInvited
+            };
     }
 }

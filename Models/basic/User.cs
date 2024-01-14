@@ -9,13 +9,13 @@ public partial class User
     public long Id {get; set;}
     public required string EmailAddress {get; set;}
     public required string PasswordHash {get; set;}
-    public required bool Activated {get; set;}
+    public bool? Activated {get; set;}
     public string? BlockedUntil {get; set;} // string, should probably be datetime (to prevent problems)
-    public long SubscriptionId {get; set;}
-    public required long LanguageId {get; set;}
-    public virtual IList<long>? Profiles {get; set;}
-    public virtual IList<long>? FailedLoginAttempts {get; set;}
-    public virtual IList<long>? UserHasInvited {get; set;}
-    public virtual required bool UserHasBeenInvited {get; set;} // should probably not be a Collection (diagram error)
+    public long? SubscriptionId {get; set;}
+    public long? LanguageId {get; set;}
+    public IList<long>? Profiles {get; set;}
+    public IList<long>? FailedLoginAttempts {get; set;}
+    public IList<long>? UserHasInvited {get; set;}
+    public required bool UserHasBeenInvited {get; set;} // should probably not be a Collection (diagram error)
 
 }
