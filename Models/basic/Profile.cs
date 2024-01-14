@@ -12,12 +12,12 @@ public partial class Profile
     public string? Photo {get; set;}
     public required string DateOfBirth {get; set;} // made string for now to avoid potential server conflicts
 
-    public ICollection<long>? SubtitleSettings {get; set;}
-    public ICollection<long>? ContentTypePreferences {get; set;}
-    public ICollection<long>? GenrePreferences {get; set;}
-    public ICollection<long>? ClassificationPreferences {get; set;}
-    public ICollection<long>? WantToWatch {get; set;}
-    public ICollection<long>? ContentSession {get; set;}
+    public IList<long>? SubtitleSettings {get; set;}
+    public IList<long>? ContentTypePreferences {get; set;}
+    public IList<long>? GenrePreferences {get; set;}
+    public IList<long>? ClassificationPreferences {get; set;}
+    public IList<long>? WantToWatch {get; set;}
+    public IList<long>? ContentSession {get; set;}
 
     
 }
