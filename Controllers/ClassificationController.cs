@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.Classification.Add(classification);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClassification", new { id = classification.Id }, classification);
+            return CreatedAtAction(nameof(GetClassification), new { id = classification.Id }, classification);
         }
 
         // DELETE: api/Classification/5

@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.FailedLoginAttempt.Add(failedLoginAttempt);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFailedLoginAttempt", new { id = failedLoginAttempt.Id }, failedLoginAttempt);
+            return CreatedAtAction(nameof(GetFailedLoginAttempt), new { id = failedLoginAttempt.Id }, failedLoginAttempt);
         }
 
         // DELETE: api/FailedLogin/5

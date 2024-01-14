@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.Profile.Add(profile);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProfile", new { id = profile.ProfileId }, profile);
+            return CreatedAtAction(nameof(GetProfile), new { id = profile.ProfileId }, profile);
         }
 
         // DELETE: api/Profile/5

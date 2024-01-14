@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.PersonalOffer.Add(personalOffer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPersonalOffer", new { id = personalOffer.Id }, personalOffer);
+            return CreatedAtAction(nameof(GetPersonalOffer), new { id = personalOffer.Id }, personalOffer);
         }
 
         // DELETE: api/PersonalOffer/5

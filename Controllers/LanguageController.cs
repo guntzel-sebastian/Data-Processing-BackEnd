@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.Language.Add(language);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLanguage", new { id = language.Id }, language);
+            return CreatedAtAction(nameof(GetLanguage), new { id = language.Id }, language);
         }
 
         // DELETE: api/Language/5

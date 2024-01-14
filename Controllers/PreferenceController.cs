@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.Preference.Add(preference);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPreference", new { id = preference.Id }, preference);
+            return CreatedAtAction(nameof(GetPreference), new { id = preference.Id }, preference);
         }
 
         // DELETE: api/Preference/5

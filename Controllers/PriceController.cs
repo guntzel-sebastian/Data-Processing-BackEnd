@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.Price.Add(price);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPrice", new { id = price.Id }, price);
+            return CreatedAtAction(nameof(GetPrice), new { id = price.Id }, price);
         }
 
         // DELETE: api/Price/5

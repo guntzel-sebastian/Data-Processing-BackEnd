@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.Nationality.Add(nationality);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetNationality", new { id = nationality.Id }, nationality);
+            return CreatedAtAction(nameof(GetNationality), new { id = nationality.Id }, nationality);
         }
 
         // DELETE: api/Nationality/5

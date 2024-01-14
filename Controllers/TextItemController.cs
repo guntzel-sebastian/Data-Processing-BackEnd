@@ -80,7 +80,7 @@ namespace NetflixAPI.Controllers
             _context.TextItem.Add(textItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTextItem", new { id = textItem.Id }, textItem);
+            return CreatedAtAction(nameof(GetTextItem), new { id = textItem.Id }, textItem);
         }
 
         // DELETE: api/TextItem/5
