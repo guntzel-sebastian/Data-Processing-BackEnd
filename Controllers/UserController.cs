@@ -76,23 +76,20 @@ namespace NetflixAPI.Controllers
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserRegister>> RegisterUser(UserRegister userRegister)
+        public async Task<ActionResult<User>> RegisterUser(User user)
         {
 
-            var user = new User
+            bool invited = false;
+            if(user.UserHasBeenInvited)
             {
-                EmailAddress = userRegister.EmailAddress,
-                PasswordHash = userRegister.Password,
-                UserHasBeenInvited = userRegister.UserHasBeenInvited
-            };
+                user.UserHasBeenInvited = true;
+            }
+
 
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(
-                nameof(GetUser),
-                new { id = user.Id },
-                UserToRegister(user));
+            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
         // DELETE: api/User/5
@@ -116,12 +113,5 @@ namespace NetflixAPI.Controllers
             return _context.User.Any(e => e.Id == id);
         }
 
-        private static UserRegister UserToRegister(User user) =>
-            new UserRegister
-            {
-                EmailAddress = user.EmailAddress,
-                Password = user.PasswordHash,
-                UserHasBeenInvited = user.UserHasBeenInvited
-            };
     }
 }
