@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+
+namespace NetflixAPI.Models;
+
+[PrimaryKey(nameof(UserId), nameof(UserId_0))]
 public partial class UserHasInvited
 {
     public UserHasInvited()
@@ -8,6 +13,4 @@ public partial class UserHasInvited
     public long UserId {get; set;}
     public long UserId_0 {get; set;} // should be renamed to InvitedUserId 
 
-    public virtual User User {get; set;}
-    public virtual User InvitedUser {get; set;}
 }

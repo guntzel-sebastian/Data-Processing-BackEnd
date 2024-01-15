@@ -1,8 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+
+namespace NetflixAPI.Models;
+
+[PrimaryKey(nameof(ProfileId), nameof(EpisodeId))]
 public partial class ContentSession
 {
     public ContentSession()
     {
-
     }
 
     public long ProfileId {get; set;}
@@ -12,6 +16,4 @@ public partial class ContentSession
     public long LeftOffAt {get; set;}
     public long TimeWatched {get; set;}
 
-    public virtual Profile Profile{get; set;}
-    public virtual Episode Episode{get; set;}
 }

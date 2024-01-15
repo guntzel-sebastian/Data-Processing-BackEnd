@@ -11,47 +11,47 @@ namespace NetflixAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class PriceController : ControllerBase
     {
         private readonly NetflixContext _context;
 
-        public AccountController(NetflixContext context)
+        public PriceController(NetflixContext context)
         {
             _context = context;
         }
 
-        // GET: api/Account
+        // GET: api/Price
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> GetAccount()
+        public async Task<ActionResult<IEnumerable<Price>>> GetPrice()
         {
-            return await _context.Account.ToListAsync();
+            return await _context.Price.ToListAsync();
         }
 
-        // GET: api/Account/5
+        // GET: api/Price/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccount(long id)
+        public async Task<ActionResult<Price>> GetPrice(long id)
         {
-            var account = await _context.Account.FindAsync(id);
+            var price = await _context.Price.FindAsync(id);
 
-            if (account == null)
+            if (price == null)
             {
                 return NotFound();
             }
 
-            return account;
+            return price;
         }
 
-        // PUT: api/Account/5
+        // PUT: api/Price/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAccount(long id, Account account)
+        public async Task<IActionResult> PutPrice(long id, Price price)
         {
-            if (id != account.Id)
+            if (id != price.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(account).State = EntityState.Modified;
+            _context.Entry(price).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountExists(id))
+                if (!PriceExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Account
+        // POST: api/Price
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Account>> PostAccount(Account account)
+        public async Task<ActionResult<Price>> PostPrice(Price price)
         {
-            _context.Account.Add(account);
+            _context.Price.Add(price);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAccount), new { id = account.Id }, account);
+            return CreatedAtAction(nameof(GetPrice), new { id = price.Id }, price);
         }
 
-        // DELETE: api/Account/5
+        // DELETE: api/Price/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAccount(long id)
+        public async Task<IActionResult> DeletePrice(long id)
         {
-            var account = await _context.Account.FindAsync(id);
-            if (account == null)
+            var price = await _context.Price.FindAsync(id);
+            if (price == null)
             {
                 return NotFound();
             }
 
-            _context.Account.Remove(account);
+            _context.Price.Remove(price);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AccountExists(long id)
+        private bool PriceExists(long id)
         {
-            return _context.Account.Any(e => e.Id == id);
+            return _context.Price.Any(e => e.Id == id);
         }
     }
 }
