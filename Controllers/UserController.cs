@@ -79,12 +79,10 @@ namespace NetflixAPI.Controllers
         public async Task<ActionResult<User>> RegisterUser(User user)
         {
 
-            bool invited = false;
             if(user.UserHasBeenInvited)
             {
                 user.UserHasBeenInvited = true;
             }
-
 
             _context.User.Add(user);
             await _context.SaveChangesAsync();
