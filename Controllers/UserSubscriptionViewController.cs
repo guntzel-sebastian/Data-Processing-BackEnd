@@ -31,16 +31,14 @@ namespace NetflixAPI.Controllers
         {
             var headers = HttpContext.Request.Headers;
 
-            StringValues token;
-            headers.TryGetValue("token", out token);
+            headers.TryGetValue("token", out StringValues token);
             if (token == "false")
             {
                 return Unauthorized("Login has expired, please log in again");
             }
 
-            StringValues userRole;
-            headers.TryGetValue("userRole", out userRole);
-            if(!userRole.Equals("Senior"))
+            headers.TryGetValue("userRole", out StringValues userRole);
+            if (!userRole.Equals("Senior"))
             {
                 return StatusCode(403, "User lacks required privileges");
             }
