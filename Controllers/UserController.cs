@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -76,7 +77,7 @@ namespace NetflixAPI.Controllers
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> RegisterUser(User user)
+        public async Task<ActionResult<User>> UserRegister(User user)
         {
 
             if(user.UserHasBeenInvited)
@@ -84,10 +85,58 @@ namespace NetflixAPI.Controllers
                 user.UserHasBeenInvited = true;
             }
 
+            if(!user.Validate())
+            {
+                return BadRequest();
+            }
+
+            var users = _context.User.ToList();
+
+            foreach(User dbUser in users)
+            {
+                if(user.EmailAddress == dbUser.EmailAddress)
+                {
+                    return Conflict();
+                }
+            }
+
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<User>> UserLogin(User user)
+        {
+
+            if(!user.Validate())
+            {
+                return BadRequest();
+            }
+
+            var users = _context.User.ToList();
+            bool userExists = false;
+            foreach(User dbUser in users)
+            {
+                if(user.EmailAddress == dbUser.EmailAddress)
+                {
+                    userExists = true;
+                }
+            }
+
+            if(!userExists)
+            {
+                return NotFound();
+            }
+
+            if(user.FailedLoginAttempts.Count >= 3)
+            {
+                return StatusCode(423);
+            }
+            
+            return
+            
         }
 
         // DELETE: api/User/5

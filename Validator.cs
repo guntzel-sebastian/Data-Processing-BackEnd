@@ -1,0 +1,4 @@
+interface IValidator
+{
+    bool Validate();
+}
