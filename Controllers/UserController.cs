@@ -107,7 +107,7 @@ namespace NetflixAPI.Controllers
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
-
+/*
         [HttpPost]
         public async Task<ActionResult<JsonWebToken>> UserLogin(User user)
         {
@@ -140,7 +140,7 @@ namespace NetflixAPI.Controllers
             return JsonWebToken;
             
         }
-
+*/
         // DELETE: api/User/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(long id)
