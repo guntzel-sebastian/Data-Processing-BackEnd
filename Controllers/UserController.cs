@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
 using NetflixAPI.Models;
+using NuGet.Common;
 
 namespace NetflixAPI.Controllers
 {
@@ -87,7 +89,7 @@ namespace NetflixAPI.Controllers
 
             if(!user.Validate())
             {
-                return BadRequest();
+                return BadRequest("Invalid user data, please check your input");
             }
 
             var users = _context.User.ToList();
@@ -96,7 +98,7 @@ namespace NetflixAPI.Controllers
             {
                 if(user.EmailAddress == dbUser.EmailAddress)
                 {
-                    return Conflict();
+                    return Conflict("User already exists");
                 }
             }
 
@@ -107,12 +109,12 @@ namespace NetflixAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> UserLogin(User user)
+        public async Task<ActionResult<JsonWebToken>> UserLogin(User user)
         {
 
             if(!user.Validate())
             {
-                return BadRequest();
+                return BadRequest("Invalid email or password");
             }
 
             var users = _context.User.ToList();
@@ -127,15 +129,15 @@ namespace NetflixAPI.Controllers
 
             if(!userExists)
             {
-                return NotFound();
+                return NotFound("User does not exist");
             }
 
             if(user.FailedLoginAttempts.Count >= 3)
             {
-                return StatusCode(423);
+                return StatusCode(423, "User account is locked due to consecutive login failures");
             }
             
-            return
+            return JsonWebToken;
             
         }
 
