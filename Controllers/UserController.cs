@@ -124,7 +124,7 @@ namespace NetflixAPI.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> UserLogin(User user)
+        public IActionResult UserLogin(User user)
         {
 
             if(!user.Validate())
@@ -154,7 +154,7 @@ namespace NetflixAPI.Controllers
                 return StatusCode(423, "User account is locked due to consecutive login failures");
             }
 
-            return CreateToken(user, "Admin");
+            return Ok(CreateToken(user, "Admin"));
                         
         }
 
