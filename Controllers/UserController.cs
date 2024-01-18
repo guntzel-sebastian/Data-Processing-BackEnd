@@ -16,7 +16,6 @@ namespace NetflixAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly NetflixContext _context;
@@ -81,6 +80,7 @@ namespace NetflixAPI.Controllers
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Route("register")]
         public async Task<ActionResult<User>> UserRegister(User user)
         {
 
