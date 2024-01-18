@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using NetflixAPI.Models;
 using NuGet.Common;
 
@@ -16,6 +19,7 @@ namespace NetflixAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly NetflixContext _context;
@@ -81,6 +85,7 @@ namespace NetflixAPI.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Route("register")]
+        [AllowAnonymous]
         public async Task<ActionResult<User>> UserRegister(User user)
         {
 
@@ -109,8 +114,10 @@ namespace NetflixAPI.Controllers
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
-/*
+
         [HttpPost]
+        [Route("login")]
+        [AllowAnonymous]
         public async Task<ActionResult<JsonWebToken>> UserLogin(User user)
         {
 
@@ -120,12 +127,14 @@ namespace NetflixAPI.Controllers
             }
 
             var users = _context.User.ToList();
+            User compareUser;
             bool userExists = false;
             foreach(User dbUser in users)
             {
                 if(user.EmailAddress == dbUser.EmailAddress)
                 {
                     userExists = true;
+                    compareUser = dbUser;
                 }
             }
 
@@ -138,11 +147,11 @@ namespace NetflixAPI.Controllers
             {
                 return StatusCode(423, "User account is locked due to consecutive login failures");
             }
+
             
-            return JsonWebToken;
-            
+                        
         }
-*/
+
         // DELETE: api/User/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(long id)
