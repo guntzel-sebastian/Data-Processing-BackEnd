@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -9,12 +10,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
-using NetflixAPI.Models;
 using NuGet.Common;
 using System.Security.Claims;
+using Microsoft.Extensions.Configuration;
+
+using NetflixAPI.Models;
 
 namespace NetflixAPI.Controllers
 {
@@ -179,20 +182,24 @@ namespace NetflixAPI.Controllers
         private string CreateToken(User user, string role)
         {
             
-            List<Claim> claims = new List<Claim>
+            var tokenOptions = _configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                new Claim(ClaimTypes.Name, user.EmailAddress),
-                new Claim(ClaimTypes.Role, role)
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.EmailAddress),
+                    new Claim(ClaimTypes.Role, role)
+                }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-            var token = new JwtSecurityToken(
-                                    claims: claims,
-                                    expires: DateTime.UtcNow.AddDays(1),
-                                    signingCredentials: cred
-);
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenRaw = tokenHandler.CreateToken(tokenDescriptor);
+            var jwt = tokenHandler.WriteToken(tokenRaw);
+
             return jwt;
 
         }
