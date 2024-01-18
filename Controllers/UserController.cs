@@ -124,37 +124,30 @@ namespace NetflixAPI.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public IActionResult UserLogin(User user)
+        public IActionResult UserLogin(LoginUser loginUser)
         {
 
-            if(!user.Validate())
+            if(!loginUser.Validate())
             {
                 return BadRequest("Invalid email or password");
             }
 
             var users = _context.User.ToList();
-            User compareUser;
-            bool userExists = false;
             foreach(User dbUser in users)
             {
-                if(user.EmailAddress == dbUser.EmailAddress)
+                if(loginUser.EmailAddress == dbUser.EmailAddress)
                 {
-                    userExists = true;
-                    compareUser = dbUser;
+                    if(dbUser.FailedLoginAttempts.Count >= 3)
+                    {
+                        return StatusCode(423, "User account is locked due to consecutive login failures");
+                    }
+
+                    return Ok(CreateToken(dbUser, "Admin"));
+
                 }
             }
 
-            if(!userExists)
-            {
-                return NotFound("User does not exist");
-            }
-
-            if(user.FailedLoginAttempts.Count >= 3)
-            {
-                return StatusCode(423, "User account is locked due to consecutive login failures");
-            }
-
-            return Ok(CreateToken(user, "Admin"));
+            return NotFound("User does not exist");
                         
         }
 
