@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using NetflixAPI.Models;
 using NuGet.Common;
+using System.Security.Claims;
 
 namespace NetflixAPI.Controllers
 {
@@ -23,10 +24,12 @@ namespace NetflixAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly NetflixContext _context;
+        private readonly IConfiguration _configuration;
 
-        public UserController(NetflixContext context)
+        public UserController(NetflixContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: api/User
@@ -118,7 +121,7 @@ namespace NetflixAPI.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<JsonWebToken>> UserLogin(User user)
+        public async Task<ActionResult<string>> UserLogin(User user)
         {
 
             if(!user.Validate())
@@ -148,7 +151,7 @@ namespace NetflixAPI.Controllers
                 return StatusCode(423, "User account is locked due to consecutive login failures");
             }
 
-            
+            return CreateToken(user, "Admin");
                         
         }
 
@@ -173,5 +176,27 @@ namespace NetflixAPI.Controllers
             return _context.User.Any(e => e.Id == id);
         }
 
+        private string CreateToken(User user, string role)
+        {
+            
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.EmailAddress),
+                new Claim(ClaimTypes.Role, role)
+            };
+
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var token = new JwtSecurityToken(
+                                    claims: claims,
+                                    expires: DateTime.UtcNow.AddDays(1),
+                                    signingCredentials: cred
+);
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            return jwt;
+
+        }
+
     }
+
 }

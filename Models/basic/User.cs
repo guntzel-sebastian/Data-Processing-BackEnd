@@ -42,8 +42,6 @@ public partial class User : IValidator
             return false;
         }
 
-
-
         return true;
 
     }
