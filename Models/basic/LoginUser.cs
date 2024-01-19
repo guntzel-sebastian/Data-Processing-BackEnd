@@ -37,7 +37,7 @@ public partial class LoginUser : IValidator
     public bool Validate()
     {
         
-        if(IsEmailValid().Result)
+        if(!IsEmailValid().Result)
         {
             return false;
         }
