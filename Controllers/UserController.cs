@@ -118,7 +118,7 @@ namespace NetflixAPI.Controllers
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(user), user.EmailAddress);
+            return Created();
         }
 
         [HttpPost]
@@ -143,7 +143,6 @@ namespace NetflixAPI.Controllers
                     }
 
                     return Ok(CreateToken(dbUser, "Admin"));
-
                 }
             }
 
