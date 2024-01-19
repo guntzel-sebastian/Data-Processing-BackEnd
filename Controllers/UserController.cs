@@ -118,7 +118,7 @@ namespace NetflixAPI.Controllers
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(user.EmailAddress);
+            return CreatedAtAction(nameof(user), user.EmailAddress);
         }
 
         [HttpPost]
