@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 using System.Text;
 using System.Configuration;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,7 @@ builder.Services.AddControllers()
     .AddXmlDataContractSerializerFormatters(); //XmlSerializer doesn't like lists
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddDbContext<NetflixContext>(opt =>
-    opt.UseInMemoryDatabase("NetflixDB"));
+    opt.UseSqlServer("Server=localhost;Database=Netflix;Trusted_Connection=True;"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
