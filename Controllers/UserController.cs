@@ -118,7 +118,7 @@ namespace NetflixAPI.Controllers
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            return CreatedAtAction(user.EmailAddress);
         }
 
         [HttpPost]
@@ -176,7 +176,7 @@ namespace NetflixAPI.Controllers
         {
             
             var tokenOptions = _configuration.GetSection("TokenOptions").Get<TokenOptions>();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
