@@ -41,4 +41,11 @@ public DbSet<NetflixAPI.Models.Season> Season_1 { get; set; } = default!;
 public DbSet<NetflixAPI.Models.Episode> Episode_1 { get; set; } = default!;
 
 public DbSet<NetflixAPI.Models.SubtitleContent> SubtitleContent_1 { get; set; } = default!;
+
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Country>().HasKey(x => x.country_id);
+    base.OnModelCreating(modelBuilder);
+}
+
 }

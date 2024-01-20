@@ -11,47 +11,47 @@ namespace NetflixAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CountryController : ControllerBase
+    public class GenreController : ControllerBase
     {
         private readonly NetflixContext _context;
 
-        public CountryController(NetflixContext context)
+        public GenreController(NetflixContext context)
         {
             _context = context;
         }
 
-        // GET: api/Country
+        // GET: api/Genre
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Country>>> GetCountry()
+        public async Task<ActionResult<IEnumerable<Genre>>> GetGenre()
         {
-            return await _context.Country.ToListAsync();
+            return await _context.Genre.ToListAsync();
         }
 
-        // GET: api/Country/5
+        // GET: api/Genre/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Country>> GetCountry(int id)
+        public async Task<ActionResult<Genre>> GetGenre(int id)
         {
-            var country = await _context.Country.FindAsync(id);
+            var genre = await _context.Genre.FindAsync(id);
 
-            if (country == null)
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            return country;
+            return genre;
         }
 
-        // PUT: api/Country/5
+        // PUT: api/Genre/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountry(int id, Country country)
+        public async Task<IActionResult> PutGenre(int id, Genre genre)
         {
-            if (id != country.country_id)
+            if (id != genre.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(country).State = EntityState.Modified;
+            _context.Entry(genre).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CountryExists(id))
+                if (!GenreExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Country
+        // POST: api/Genre
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Country>> PostCountry(Country country)
+        public async Task<ActionResult<Genre>> PostGenre(Genre genre)
         {
-            _context.Country.Add(country);
+            _context.Genre.Add(genre);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCountry), new { id = country.country_id }, country);
+            return CreatedAtAction("GetGenre", new { id = genre.Id }, genre);
         }
 
-        // DELETE: api/Country/5
+        // DELETE: api/Genre/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCountry(int id)
+        public async Task<IActionResult> DeleteGenre(int id)
         {
-            var country = await _context.Country.FindAsync(id);
-            if (country == null)
+            var genre = await _context.Genre.FindAsync(id);
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            _context.Country.Remove(country);
+            _context.Genre.Remove(genre);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CountryExists(int id)
+        private bool GenreExists(int id)
         {
-            return _context.Country.Any(e => e.country_id == id);
+            return _context.Genre.Any(e => e.Id == id);
         }
     }
 }
