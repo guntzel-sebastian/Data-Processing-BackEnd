@@ -10,9 +10,9 @@ public partial class SubtitleSettings
 
     }
 
-    public required long size {get; set;}
+    public required int size {get; set;}
     public required string color {get; set;}
-    public long profile_id {get; set;}
-    public long language_id {get; set;}
+    public int profile_id {get; set;}
+    public int language_id {get; set;}
 
 }

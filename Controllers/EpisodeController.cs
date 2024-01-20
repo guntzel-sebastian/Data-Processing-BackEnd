@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Episode/5
         [HttpGet("{episode_id}")]
-        public async Task<ActionResult<Episode>> GetEpisode(long episode_id)
+        public async Task<ActionResult<Episode>> GetEpisode(int episode_id)
         {
             var episode = await _context.Episode_1.FindAsync(episode_id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Episode/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{episode_id}")]
-        public async Task<IActionResult> PutEpisode(long episode_id, Episode episode)
+        public async Task<IActionResult> PutEpisode(int episode_id, Episode episode)
         {
             if (episode_id != episode.episode_id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Episode/5
         [HttpDelete("{episode_id}")]
-        public async Task<IActionResult> DeleteEpisode(long episode_id)
+        public async Task<IActionResult> DeleteEpisode(int episode_id)
         {
             var episode = await _context.Episode_1.FindAsync(episode_id);
             if (episode == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool EpisodeExists(long episode_id)
+        private bool EpisodeExists(int episode_id)
         {
             return _context.Episode_1.Any(e => e.episode_id == episode_id);
         }

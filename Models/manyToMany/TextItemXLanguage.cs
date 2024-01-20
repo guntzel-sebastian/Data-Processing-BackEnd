@@ -10,8 +10,8 @@ public partial class TextItemXLanguage
 
     }
 
-    public long language_id {get; set;}
-    public long text_item_id {get; set;}
+    public int language_id {get; set;}
+    public int text_item_id {get; set;}
 
     // public string content {get; set;}
     

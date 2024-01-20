@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/SubtitleContent/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{subtitle_id}")]
-        public async Task<IActionResult> PutSubtitleContent(long subtitle_id, SubtitleContent subtitleContent)
+        public async Task<IActionResult> PutSubtitleContent(int subtitle_id, SubtitleContent subtitleContent)
         {
             if (subtitle_id != subtitleContent.subtitle_id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/SubtitleContent/5
         [HttpDelete("{subtitle_id}")]
-        public async Task<IActionResult> DeleteSubtitleContent(long subtitle_id)
+        public async Task<IActionResult> DeleteSubtitleContent(int subtitle_id)
         {
             var subtitleContent = await _context.SubtitleContent_1.FindAsync(subtitle_id);
             if (subtitleContent == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool SubtitleContentExists(long subtitle_id)
+        private bool SubtitleContentExists(int subtitle_id)
         {
             return _context.SubtitleContent_1.Any(e => e.subtitle_id == subtitle_id);
         }

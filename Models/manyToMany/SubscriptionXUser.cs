@@ -10,8 +10,8 @@ public partial class SubscriptionXUser
 
     }
 
-    public long subscription_id {get; set;}
-    public long user_id {get; set;}
+    public int subscription_id {get; set;}
+    public int user_id {get; set;}
 
     public required string date_acquired {get; set;} // should be datetime
     public required double duration_in_days {get; set;}

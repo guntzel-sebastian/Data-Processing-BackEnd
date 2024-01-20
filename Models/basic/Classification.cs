@@ -7,7 +7,7 @@ public partial class Classification
     {
     }
 
-    public long classification_id {get; set;}
+    public int classification_id {get; set;}
     public required int age_rating {get; set;}
 
 }

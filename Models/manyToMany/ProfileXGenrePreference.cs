@@ -10,7 +10,7 @@ public partial class ProfileXGenrePreference
 
     }
 
-    public long profile_id {get; set;}
-    public long genre_id {get; set;}
+    public int profile_id {get; set;}
+    public int genre_id {get; set;}
 
 }

@@ -8,7 +8,7 @@ public partial class FailedLoginAttempt
     {
     }
 
-    public long user_id {get; set;}
+    public int user_id {get; set;}
     public required string date {get; set;} // should be datetime probably
     public required string time {get; set;} // should be merged with datetime
 

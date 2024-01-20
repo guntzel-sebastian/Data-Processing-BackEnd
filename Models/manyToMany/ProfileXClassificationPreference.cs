@@ -9,7 +9,7 @@ public partial class ProfileXClassificationPreference
     {
     }
 
-    public long profile_id {get; set;}
-    public long classification_id {get; set;}
+    public int profile_id {get; set;}
+    public int classification_id {get; set;}
 
 }

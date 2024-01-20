@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Country/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{country_id}")]
-        public async Task<IActionResult> PutCountry(long country_id, Country country)
+        public async Task<IActionResult> PutCountry(int country_id, Country country)
         {
             if (country_id != country.country_id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Country/5
         [HttpDelete("{country_id}")]
-        public async Task<IActionResult> DeleteCountry(long country_id)
+        public async Task<IActionResult> DeleteCountry(int country_id)
         {
             var country = await _context.Country.FindAsync(country_id);
             if (country == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool CountryExists(long country_id)
+        private bool CountryExists(int country_id)
         {
             return _context.Country.Any(e => e.country_id == country_id);
         }

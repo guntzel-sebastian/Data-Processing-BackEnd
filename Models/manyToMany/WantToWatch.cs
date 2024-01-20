@@ -10,8 +10,8 @@ public partial class WantToWatch
 
     }
 
-    public long profile_id {get; set;}
-    public long content_id {get; set;}
+    public int profile_id {get; set;}
+    public int content_id {get; set;}
 
     public bool watched {get; set;}
 

@@ -9,11 +9,11 @@ public partial class ContentSession
     {
     }
 
-    public long profile_id {get; set;}
-    public long episode_id {get; set;}
+    public int profile_id {get; set;}
+    public int episode_id {get; set;}
 
     public bool active {get; set;}
-    public long left_off_at {get; set;}
-    public long time_watched {get; set;}
+    public int left_off_at {get; set;}
+    public int time_watched {get; set;}
 
 }

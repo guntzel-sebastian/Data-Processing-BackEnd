@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Season/5
         [HttpGet("{season_id}")]
-        public async Task<ActionResult<Season>> GetSeason(long season_id)
+        public async Task<ActionResult<Season>> GetSeason(int season_id)
         {
             var season = await _context.Season_1.FindAsync(season_id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Season/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{season_id}")]
-        public async Task<IActionResult> PutSeason(long season_id, Season season)
+        public async Task<IActionResult> PutSeason(int season_id, Season season)
         {
             if (season_id != season.season_id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Season/5
         [HttpDelete("{season_id}")]
-        public async Task<IActionResult> DeleteSeason(long season_id)
+        public async Task<IActionResult> DeleteSeason(int season_id)
         {
             var season = await _context.Season_1.FindAsync(season_id);
             if (season == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool SeasonExists(long season_id)
+        private bool SeasonExists(int season_id)
         {
             return _context.Season_1.Any(e => e.season_id == season_id);
         }

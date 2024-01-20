@@ -7,8 +7,8 @@ public partial class Season
     {
     }
 
-    public long season_id { get; set; }
-    public long content_id { get; set; }
+    public int season_id { get; set; }
+    public int content_id { get; set; }
     public required string director { get; set; }
     public required string release_date { get; set; }
 

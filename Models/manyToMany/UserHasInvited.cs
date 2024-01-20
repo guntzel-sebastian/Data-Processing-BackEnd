@@ -11,8 +11,8 @@ public partial class UserHasInvited
 
     }
 
-    public long user_id {get; set;}
-    public long invited_user_id {get; set;}
+    public int user_id {get; set;}
+    public int invited_user_id {get; set;}
     public bool invited {get; set;}
 
 }

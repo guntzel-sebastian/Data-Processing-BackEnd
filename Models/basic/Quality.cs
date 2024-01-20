@@ -6,7 +6,7 @@ public partial class Quality
     {
     }
 
-    public long quality_id {get; set;}
+    public int quality_id {get; set;}
     public required string quality_name {get; set;}
 
 }

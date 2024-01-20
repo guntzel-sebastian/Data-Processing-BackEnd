@@ -6,8 +6,8 @@ public partial class Profile
     {
     }
 
-    public long profile_id {get; set;}
-    public long user_id {get; set;}
+    public int profile_id {get; set;}
+    public int user_id {get; set;}
     public required string name {get; set;}
     public string? profile_image {get; set;}
     public required DateTime DateOfBirth {get; set;} // made string for now to avoid potential server conflicts

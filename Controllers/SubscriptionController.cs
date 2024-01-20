@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Subscription/5
         [HttpGet("{subscription_id}")]
-        public async Task<ActionResult<Subscription>> GetSubscription(long subscription_id)
+        public async Task<ActionResult<Subscription>> GetSubscription(int subscription_id)
         {
             var subscription = await _context.Subscription.FindAsync(subscription_id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Subscription/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{subscription_id}")]
-        public async Task<IActionResult> PutSubscription(long subscription_id, Subscription subscription)
+        public async Task<IActionResult> PutSubscription(int subscription_id, Subscription subscription)
         {
             if (subscription_id != subscription.subscription_id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Subscription/5
         [HttpDelete("{subscription_id}")]
-        public async Task<IActionResult> DeleteSubscription(long subscription_id)
+        public async Task<IActionResult> DeleteSubscription(int subscription_id)
         {
             var subscription = await _context.Subscription.FindAsync(subscription_id);
             if (subscription == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool SubscriptionExists(long subscription_id)
+        private bool SubscriptionExists(int subscription_id)
         {
             return _context.Subscription.Any(e => e.subscription_id == subscription_id);
         }
