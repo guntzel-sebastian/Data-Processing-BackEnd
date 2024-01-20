@@ -30,10 +30,10 @@ namespace NetflixAPI.Controllers
         }
 
         // GET: api/Profile/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Profile>> GetProfile(long id)
+        [HttpGet("{profile_id}")]
+        public async Task<ActionResult<Profile>> GetProfile(long profile_id)
         {
-            var profile = await _context.Profile.FindAsync(id);
+            var profile = await _context.Profile.FindAsync(profile_id);
 
             if (profile == null)
             {
@@ -45,10 +45,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/Profile/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProfile(long id, Profile profile)
+        [HttpPut("{profile_id}")]
+        public async Task<IActionResult> PutProfile(long profile_id, Profile profile)
         {
-            if (id != profile.ProfileId)
+            if (profile_id != profile.profile_id)
             {
                 return BadRequest();
             }
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProfileExists(id))
+                if (!ProfileExists(profile_id))
                 {
                     return NotFound();
                 }
@@ -82,14 +82,14 @@ namespace NetflixAPI.Controllers
             _context.Profile.Add(profile);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProfile), new { id = profile.ProfileId }, profile);
+            return CreatedAtAction(nameof(GetProfile), new { profile_id = profile.profile_id }, profile);
         }
 
         // DELETE: api/Profile/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProfile(long id)
+        [HttpDelete("{profile_id}")]
+        public async Task<IActionResult> DeleteProfile(long profile_id)
         {
-            var profile = await _context.Profile.FindAsync(id);
+            var profile = await _context.Profile.FindAsync(profile_id);
             if (profile == null)
             {
                 return NotFound();
@@ -101,9 +101,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool ProfileExists(long id)
+        private bool ProfileExists(long profile_id)
         {
-            return _context.Profile.Any(e => e.ProfileId == id);
+            return _context.Profile.Any(e => e.profile_id == profile_id);
         }
     }
 }

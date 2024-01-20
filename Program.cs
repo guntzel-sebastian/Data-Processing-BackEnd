@@ -47,7 +47,7 @@ app.MapGet("/security/getMessage", () => "Hello World!").RequireAuthorization();
 app.MapPost("/security/createToken",
 [AllowAnonymous] (User user) =>
 {
-    if (user.EmailAddress == "joydip" && user.PasswordHash == "joydip123")
+    if (user.email == "joydip" && user.email == "joydip123")
     {
         var issuer = builder.Configuration["Jwt:Issuer"];
         var audience = builder.Configuration["Jwt:Audience"];
@@ -58,8 +58,8 @@ app.MapPost("/security/createToken",
             Subject = new ClaimsIdentity(new[]
             {
                 new Claim("Id", Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, user.EmailAddress),
-                new Claim(JwtRegisteredClaimNames.Email, user.EmailAddress),
+                new Claim(JwtRegisteredClaimNames.Sub, user.email),
+                new Claim(JwtRegisteredClaimNames.Email, user.email),
                 new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString())
              }),

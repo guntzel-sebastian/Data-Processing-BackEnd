@@ -7,9 +7,9 @@ public partial class SubtitleContent
     {
     }
 
-    public long Id { get; set; }
-    public long EpisodeId { get; set; }
-    public long LanguageId { get; set; }
-    public required string SubtitleLocation { get; set; }
+    public long subtitle_id { get; set; }
+    public long episode_id { get; set; }
+    public long language_id { get; set; }
+    public required string subtitle_location { get; set; }
 
 }

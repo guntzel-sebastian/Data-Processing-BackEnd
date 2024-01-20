@@ -7,14 +7,14 @@ public partial class WatchableContent
     {
     }
 
-    public long Id { get; set; }
-    public required string Title { get; set; }
+    public long content_id { get; set; }
+    public required string title { get; set; }
     public long CountryId { get; set; } 
-    public required string ReleaseDate { get; set; }
-    public required int AgeRating { get; set; }
-    public required string Director { get; set; }
-    public string? CoverImage { get; set; }
-    public long ContentTypeId { get; set; }
+    public required string release_date { get; set; }
+    public required int age_rating { get; set; }
+    public required string director { get; set; }
+    public string? cover_image { get; set; }
+    public long content_type_id { get; set; }
 
     public virtual IList<long>? Seasons { get; set; }
     public virtual IList<long>? Episodes { get; set; }

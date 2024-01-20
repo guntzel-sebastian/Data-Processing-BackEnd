@@ -28,10 +28,10 @@ namespace NetflixAPI.Controllers
         }
 
         // GET: api/Subscription/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Subscription>> GetSubscription(long id)
+        [HttpGet("{subscription_id}")]
+        public async Task<ActionResult<Subscription>> GetSubscription(long subscription_id)
         {
-            var subscription = await _context.Subscription.FindAsync(id);
+            var subscription = await _context.Subscription.FindAsync(subscription_id);
 
             if (subscription == null)
             {
@@ -43,10 +43,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/Subscription/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubscription(long id, Subscription subscription)
+        [HttpPut("{subscription_id}")]
+        public async Task<IActionResult> PutSubscription(long subscription_id, Subscription subscription)
         {
-            if (id != subscription.SubscriptionId)
+            if (subscription_id != subscription.subscription_id)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SubscriptionExists(id))
+                if (!SubscriptionExists(subscription_id))
                 {
                     return NotFound();
                 }
@@ -80,14 +80,14 @@ namespace NetflixAPI.Controllers
             _context.Subscription.Add(subscription);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetSubscription), new { id = subscription.SubscriptionId }, subscription);
+            return CreatedAtAction(nameof(GetSubscription), new { subscription_id = subscription.subscription_id }, subscription);
         }
 
         // DELETE: api/Subscription/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSubscription(long id)
+        [HttpDelete("{subscription_id}")]
+        public async Task<IActionResult> DeleteSubscription(long subscription_id)
         {
-            var subscription = await _context.Subscription.FindAsync(id);
+            var subscription = await _context.Subscription.FindAsync(subscription_id);
             if (subscription == null)
             {
                 return NotFound();
@@ -99,9 +99,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool SubscriptionExists(long id)
+        private bool SubscriptionExists(long subscription_id)
         {
-            return _context.Subscription.Any(e => e.SubscriptionId == id);
+            return _context.Subscription.Any(e => e.subscription_id == subscription_id);
         }
     }
 }

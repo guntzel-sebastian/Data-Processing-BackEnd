@@ -41,4 +41,25 @@ public DbSet<NetflixAPI.Models.Season> Season_1 { get; set; } = default!;
 public DbSet<NetflixAPI.Models.Episode> Episode_1 { get; set; } = default!;
 
 public DbSet<NetflixAPI.Models.SubtitleContent> SubtitleContent_1 { get; set; } = default!;
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Country>().HasKey(x => x.country_id);
+        modelBuilder.Entity<User>().HasKey(x => x.user_id);
+        modelBuilder.Entity<Subscription>().HasKey(x => x.subscription_id);
+        modelBuilder.Entity<Quality>().HasKey(x => x.quality_id);
+        modelBuilder.Entity<Genre>().HasKey(x => x.genre_id);
+        modelBuilder.Entity<Classification>().HasKey(x => x.classification_id);
+        modelBuilder.Entity<WatchableContent>().HasKey(x => x.content_id);
+        modelBuilder.Entity<Season>().HasKey(x => x.season_id);
+        modelBuilder.Entity<Episode>().HasKey(x => x.episode_id);
+        modelBuilder.Entity<Profile>().HasKey(x => x.profile_id);
+        modelBuilder.Entity<FailedLoginAttempt>().HasKey(x => x.user_id);
+        modelBuilder.Entity<Language>().HasKey(x => x.language_id);
+        modelBuilder.Entity<TextItem>().HasKey(x => x.text_item_id);
+        modelBuilder.Entity<ContentType>().HasKey(x => x.content_type_id);
+        modelBuilder.Entity<SubtitleContent>().HasKey(x => x.subtitle_id);
+
+        base.OnModelCreating(modelBuilder);
+    }
 }

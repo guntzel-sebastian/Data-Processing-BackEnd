@@ -7,10 +7,10 @@ public partial class Season
     {
     }
 
-    public long Id { get; set; }
-    public long ContentId { get; set; }
-    public required string Director { get; set; }
-    public required string ReleaseDate { get; set; }
+    public long season_id { get; set; }
+    public long content_id { get; set; }
+    public required string director { get; set; }
+    public required string release_date { get; set; }
 
     public virtual IList<long>? Episodes { get; set; }
     

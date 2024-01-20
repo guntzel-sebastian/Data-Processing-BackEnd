@@ -28,10 +28,10 @@ namespace NetflixAPI.Controllers
         }
 
         // GET: api/Classification/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Classification>> GetClassification(long id)
+        [HttpGet("{classification_id}")]
+        public async Task<ActionResult<Classification>> GetClassification(long classification_id)
         {
-            var classification = await _context.Classification.FindAsync(id);
+            var classification = await _context.Classification.FindAsync(classification_id);
 
             if (classification == null)
             {
@@ -43,10 +43,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/Classification/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutClassification(long id, Classification classification)
+        [HttpPut("{classification_id}")]
+        public async Task<IActionResult> PutClassification(long classification_id, Classification classification)
         {
-            if (id != classification.Id)
+            if (classification_id != classification.classification_id)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClassificationExists(id))
+                if (!ClassificationExists(classification_id))
                 {
                     return NotFound();
                 }
@@ -80,14 +80,14 @@ namespace NetflixAPI.Controllers
             _context.Classification.Add(classification);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetClassification), new { id = classification.Id }, classification);
+            return CreatedAtAction(nameof(GetClassification), new { classification_id = classification.classification_id }, classification);
         }
 
         // DELETE: api/Classification/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClassification(long id)
+        [HttpDelete("{classification_id}")]
+        public async Task<IActionResult> DeleteClassification(long classification_id)
         {
-            var classification = await _context.Classification.FindAsync(id);
+            var classification = await _context.Classification.FindAsync(classification_id);
             if (classification == null)
             {
                 return NotFound();
@@ -99,9 +99,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool ClassificationExists(long id)
+        private bool ClassificationExists(long classification_id)
         {
-            return _context.Classification.Any(e => e.Id == id);
+            return _context.Classification.Any(e => e.classification_id == classification_id);
         }
     }
 }

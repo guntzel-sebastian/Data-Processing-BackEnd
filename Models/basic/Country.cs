@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace NetflixAPI.Models;
 
 public partial class Country
@@ -7,7 +9,7 @@ public partial class Country
     {
     }
 
-    public long Id { get; set; }
+    public long country_id { get; set; }
     public required string Name { get; set; }
     
 }

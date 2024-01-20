@@ -6,8 +6,8 @@ public partial class TextItem
     {
     }
 
-    public long Id {get; set;}
-    public required string OnPageTextId {get; set;}
+    public long text_item_id {get; set;}
+    public required string on_page_text_id {get; set;}
 
     public virtual required IList<long> Languages {get; set;}
 }

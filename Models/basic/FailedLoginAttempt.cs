@@ -8,11 +8,8 @@ public partial class FailedLoginAttempt
     {
     }
 
-    [Key]
-    public long Id {get; set;}
-
-    public long UserId {get; set;}
-    public required string Date {get; set;} // should be datetime probably
-    public required string Time {get; set;} // should be merged with datetime
+    public long user_id {get; set;}
+    public required string date {get; set;} // should be datetime probably
+    public required string time {get; set;} // should be merged with datetime
 
 }

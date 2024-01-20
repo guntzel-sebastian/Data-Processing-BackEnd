@@ -28,10 +28,10 @@ namespace NetflixAPI.Controllers
         }
 
         // GET: api/WatchableContent/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<WatchableContent>> GetWatchableContent(long id)
+        [HttpGet("{content_id}")]
+        public async Task<ActionResult<WatchableContent>> GetWatchableContent(long content_id)
         {
-            var watchableContent = await _context.WatchableContent_1.FindAsync(id);
+            var watchableContent = await _context.WatchableContent_1.FindAsync(content_id);
 
             if (watchableContent == null)
             {
@@ -43,10 +43,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/WatchableContent/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutWatchableContent(long id, WatchableContent watchableContent)
+        [HttpPut("{content_id}")]
+        public async Task<IActionResult> PutWatchableContent(long content_id, WatchableContent watchableContent)
         {
-            if (id != watchableContent.Id)
+            if (content_id != watchableContent.content_id)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!WatchableContentExists(id))
+                if (!WatchableContentExists(content_id))
                 {
                     return NotFound();
                 }
@@ -80,14 +80,14 @@ namespace NetflixAPI.Controllers
             _context.WatchableContent_1.Add(watchableContent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetWatchableContent), new { id = watchableContent.Id }, watchableContent);
+            return CreatedAtAction(nameof(GetWatchableContent), new { content_id = watchableContent.content_id }, watchableContent);
         }
 
         // DELETE: api/WatchableContent/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteWatchableContent(long id)
+        [HttpDelete("{content_id}")]
+        public async Task<IActionResult> DeleteWatchableContent(long content_id)
         {
-            var watchableContent = await _context.WatchableContent_1.FindAsync(id);
+            var watchableContent = await _context.WatchableContent_1.FindAsync(content_id);
             if (watchableContent == null)
             {
                 return NotFound();
@@ -99,9 +99,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool WatchableContentExists(long id)
+        private bool WatchableContentExists(long content_id)
         {
-            return _context.WatchableContent_1.Any(e => e.Id == id);
+            return _context.WatchableContent_1.Any(e => e.content_id == content_id);
         }
     }
 }

@@ -28,10 +28,10 @@ namespace NetflixAPI.Controllers
         }
 
         // GET: api/Season/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Season>> GetSeason(long id)
+        [HttpGet("{season_id}")]
+        public async Task<ActionResult<Season>> GetSeason(long season_id)
         {
-            var season = await _context.Season_1.FindAsync(id);
+            var season = await _context.Season_1.FindAsync(season_id);
 
             if (season == null)
             {
@@ -43,10 +43,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/Season/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSeason(long id, Season season)
+        [HttpPut("{season_id}")]
+        public async Task<IActionResult> PutSeason(long season_id, Season season)
         {
-            if (id != season.Id)
+            if (season_id != season.season_id)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SeasonExists(id))
+                if (!SeasonExists(season_id))
                 {
                     return NotFound();
                 }
@@ -80,14 +80,14 @@ namespace NetflixAPI.Controllers
             _context.Season_1.Add(season);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetSeason), new { id = season.Id }, season);
+            return CreatedAtAction(nameof(GetSeason), new { season_id = season.season_id }, season);
         }
 
         // DELETE: api/Season/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSeason(long id)
+        [HttpDelete("{season_id}")]
+        public async Task<IActionResult> DeleteSeason(long season_id)
         {
-            var season = await _context.Season_1.FindAsync(id);
+            var season = await _context.Season_1.FindAsync(season_id);
             if (season == null)
             {
                 return NotFound();
@@ -99,9 +99,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool SeasonExists(long id)
+        private bool SeasonExists(long season_id)
         {
-            return _context.Season_1.Any(e => e.Id == id);
+            return _context.Season_1.Any(e => e.season_id == season_id);
         }
     }
 }

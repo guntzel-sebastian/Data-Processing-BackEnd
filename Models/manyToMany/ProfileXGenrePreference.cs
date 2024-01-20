@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetflixAPI.Models;
 
-[PrimaryKey(nameof(ProfileId), nameof(GenreId))]
+[PrimaryKey(nameof(profile_id), nameof(genre_id))]
 public partial class ProfileXGenrePreference
 {
     public ProfileXGenrePreference()
@@ -10,7 +10,7 @@ public partial class ProfileXGenrePreference
 
     }
 
-    public long ProfileId {get; set;}
-    public long GenreId {get; set;}
+    public long profile_id {get; set;}
+    public long genre_id {get; set;}
 
 }

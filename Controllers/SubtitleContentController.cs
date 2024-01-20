@@ -43,10 +43,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/SubtitleContent/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubtitleContent(long id, SubtitleContent subtitleContent)
+        [HttpPut("{subtitle_id}")]
+        public async Task<IActionResult> PutSubtitleContent(long subtitle_id, SubtitleContent subtitleContent)
         {
-            if (id != subtitleContent.Id)
+            if (subtitle_id != subtitleContent.subtitle_id)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SubtitleContentExists(id))
+                if (!SubtitleContentExists(subtitle_id))
                 {
                     return NotFound();
                 }
@@ -80,14 +80,14 @@ namespace NetflixAPI.Controllers
             _context.SubtitleContent_1.Add(subtitleContent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetSubtitleContent), new { id = subtitleContent.Id }, subtitleContent);
+            return CreatedAtAction(nameof(GetSubtitleContent), new { id = subtitleContent.subtitle_id }, subtitleContent);
         }
 
         // DELETE: api/SubtitleContent/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSubtitleContent(long id)
+        [HttpDelete("{subtitle_id}")]
+        public async Task<IActionResult> DeleteSubtitleContent(long subtitle_id)
         {
-            var subtitleContent = await _context.SubtitleContent_1.FindAsync(id);
+            var subtitleContent = await _context.SubtitleContent_1.FindAsync(subtitle_id);
             if (subtitleContent == null)
             {
                 return NotFound();
@@ -99,9 +99,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool SubtitleContentExists(long id)
+        private bool SubtitleContentExists(long subtitle_id)
         {
-            return _context.SubtitleContent_1.Any(e => e.Id == id);
+            return _context.SubtitleContent_1.Any(e => e.subtitle_id == subtitle_id);
         }
     }
 }

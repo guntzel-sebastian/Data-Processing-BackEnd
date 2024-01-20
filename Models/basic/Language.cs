@@ -6,7 +6,7 @@ public partial class Language
     {
     }
 
-    public long Id {get; set;}
-    public required string LanguageName {get; set;}
+    public long language_id {get; set;}
+    public required string language {get; set;}
 
 }

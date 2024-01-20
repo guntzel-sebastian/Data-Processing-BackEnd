@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetflixAPI.Models;
 
-[PrimaryKey(nameof(SubscriptionId), nameof(UserId))]
+[PrimaryKey(nameof(subscription_id), nameof(user_id))]
 public partial class SubscriptionXUser
 {
     public SubscriptionXUser()
@@ -10,11 +10,11 @@ public partial class SubscriptionXUser
 
     }
 
-    public long SubscriptionId {get; set;}
-    public long UserId {get; set;}
+    public long subscription_id {get; set;}
+    public long user_id {get; set;}
 
-    public required string DateAquired {get; set;} // should be datetime
-    public required double Duration {get; set;}
-    public required double PricePaid {get; set;}
+    public required string date_acquired {get; set;} // should be datetime
+    public required double duration_in_days {get; set;}
+    public required double price_paid {get; set;}
 
 }

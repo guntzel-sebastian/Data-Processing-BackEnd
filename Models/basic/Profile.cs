@@ -6,11 +6,11 @@ public partial class Profile
     {
     }
 
-    public long ProfileId {get; set;}
-    public long UserId {get; set;}
-    public required string Name {get; set;}
-    public string? Photo {get; set;}
-    public required string DateOfBirth {get; set;} // made string for now to avoid potential server conflicts
+    public long profile_id {get; set;}
+    public long user_id {get; set;}
+    public required string name {get; set;}
+    public string? profile_image {get; set;}
+    public required DateTime DateOfBirth {get; set;} // made string for now to avoid potential server conflicts
 
     public IList<long>? SubtitleSettings {get; set;}
     public IList<long>? ContentTypePreferences {get; set;}

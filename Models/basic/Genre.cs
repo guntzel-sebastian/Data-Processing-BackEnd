@@ -6,7 +6,7 @@ public partial class Genre
     {
     }
 
-    public long Id {get; set;}
-    public required string GenreName {get; set;} // could make do with a rename to description
+    public long genre_id {get; set;}
+    public required string genre {get; set;} // could make do with a rename to description
 
 }

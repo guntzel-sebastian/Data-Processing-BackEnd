@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetflixAPI.Models;
 
-[PrimaryKey(nameof(ProfileId), nameof(LanguageId))]
+[PrimaryKey(nameof(profile_id), nameof(language_id))]
 public partial class SubtitleSettings
 {
     public SubtitleSettings()
@@ -10,9 +10,9 @@ public partial class SubtitleSettings
 
     }
 
-    public required long Size {get; set;}
-    public required string Color {get; set;}
-    public long ProfileId {get; set;}
-    public long LanguageId {get; set;}
+    public required long size {get; set;}
+    public required string color {get; set;}
+    public long profile_id {get; set;}
+    public long language_id {get; set;}
 
 }

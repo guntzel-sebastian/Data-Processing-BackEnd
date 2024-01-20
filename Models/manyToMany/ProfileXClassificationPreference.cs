@@ -2,14 +2,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetflixAPI.Models;
 
-[PrimaryKey(nameof(ProfileId), nameof(ClassificationId))]
+[PrimaryKey(nameof(profile_id), nameof(classification_id))]
 public partial class ProfileXClassificationPreference
 {
     public ProfileXClassificationPreference()
     {
     }
 
-    public long ProfileId {get; set;}
-    public long ClassificationId {get; set;}
+    public long profile_id {get; set;}
+    public long classification_id {get; set;}
 
 }

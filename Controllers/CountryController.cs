@@ -43,10 +43,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/Country/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountry(long id, Country country)
+        [HttpPut("{country_id}")]
+        public async Task<IActionResult> PutCountry(long country_id, Country country)
         {
-            if (id != country.Id)
+            if (country_id != country.country_id)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CountryExists(id))
+                if (!CountryExists(country_id))
                 {
                     return NotFound();
                 }
@@ -80,14 +80,14 @@ namespace NetflixAPI.Controllers
             _context.Country.Add(country);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCountry), new { id = country.Id }, country);
+            return CreatedAtAction(nameof(GetCountry), new { id = country.country_id }, country);
         }
 
         // DELETE: api/Country/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCountry(long id)
+        [HttpDelete("{country_id}")]
+        public async Task<IActionResult> DeleteCountry(long country_id)
         {
-            var country = await _context.Country.FindAsync(id);
+            var country = await _context.Country.FindAsync(country_id);
             if (country == null)
             {
                 return NotFound();
@@ -99,9 +99,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool CountryExists(long id)
+        private bool CountryExists(long country_id)
         {
-            return _context.Country.Any(e => e.Id == id);
+            return _context.Country.Any(e => e.country_id == country_id);
         }
     }
 }

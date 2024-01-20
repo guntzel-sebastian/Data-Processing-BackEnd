@@ -28,7 +28,7 @@ namespace NetflixAPI.Controllers
         }
 
         // GET: api/TextItem/5
-        [HttpGet("{id}")]
+        [HttpGet("{text_item_id}")]
         public async Task<ActionResult<TextItem>> GetTextItem(long id)
         {
             var textItem = await _context.TextItem.FindAsync(id);
@@ -43,10 +43,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/TextItem/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTextItem(long id, TextItem textItem)
+        [HttpPut("{text_item_id}")]
+        public async Task<IActionResult> PutTextItem(long text_item_id, TextItem textItem)
         {
-            if (id != textItem.Id)
+            if (text_item_id != textItem.text_item_id)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TextItemExists(id))
+                if (!TextItemExists(text_item_id))
                 {
                     return NotFound();
                 }
@@ -80,14 +80,14 @@ namespace NetflixAPI.Controllers
             _context.TextItem.Add(textItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetTextItem), new { id = textItem.Id }, textItem);
+            return CreatedAtAction(nameof(GetTextItem), new { text_item_id = textItem.text_item_id }, textItem);
         }
 
         // DELETE: api/TextItem/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTextItem(long id)
+        [HttpDelete("{text_item_id}")]
+        public async Task<IActionResult> DeleteTextItem(long text_item_id)
         {
-            var textItem = await _context.TextItem.FindAsync(id);
+            var textItem = await _context.TextItem.FindAsync(text_item_id);
             if (textItem == null)
             {
                 return NotFound();
@@ -99,9 +99,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool TextItemExists(long id)
+        private bool TextItemExists(long text_item_id)
         {
-            return _context.TextItem.Any(e => e.Id == id);
+            return _context.TextItem.Any(e => e.text_item_id == text_item_id);
         }
     }
 }

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetflixAPI.Models;
 
-[PrimaryKey(nameof(ProfileId), nameof(ContentId))]
+[PrimaryKey(nameof(profile_id), nameof(content_id))]
 public partial class WantToWatch
 {
     public WantToWatch()
@@ -10,9 +10,9 @@ public partial class WantToWatch
 
     }
 
-    public long ProfileId {get; set;}
-    public long ContentId {get; set;}
+    public long profile_id {get; set;}
+    public long content_id {get; set;}
 
-    public bool Watched {get; set;}
+    public bool watched {get; set;}
 
 }

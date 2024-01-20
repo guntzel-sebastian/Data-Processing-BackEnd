@@ -28,10 +28,10 @@ namespace NetflixAPI.Controllers
         }
 
         // GET: api/Language/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Language>> GetLanguage(long id)
+        [HttpGet("{language_id}")]
+        public async Task<ActionResult<Language>> GetLanguage(long language_id)
         {
-            var language = await _context.Language.FindAsync(id);
+            var language = await _context.Language.FindAsync(language_id);
 
             if (language == null)
             {
@@ -43,10 +43,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/Language/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutLanguage(long id, Language language)
+        [HttpPut("{language_id}")]
+        public async Task<IActionResult> PutLanguage(long language_id, Language language)
         {
-            if (id != language.Id)
+            if (language_id != language.language_id)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LanguageExists(id))
+                if (!LanguageExists(language_id))
                 {
                     return NotFound();
                 }
@@ -80,14 +80,14 @@ namespace NetflixAPI.Controllers
             _context.Language.Add(language);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetLanguage), new { id = language.Id }, language);
+            return CreatedAtAction(nameof(GetLanguage), new { language_id = language.language_id }, language);
         }
 
         // DELETE: api/Language/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLanguage(long id)
+        [HttpDelete("{language_id}")]
+        public async Task<IActionResult> DeleteLanguage(long language_id)
         {
-            var language = await _context.Language.FindAsync(id);
+            var language = await _context.Language.FindAsync(language_id);
             if (language == null)
             {
                 return NotFound();
@@ -99,9 +99,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool LanguageExists(long id)
+        private bool LanguageExists(long language_id)
         {
-            return _context.Language.Any(e => e.Id == id);
+            return _context.Language.Any(e => e.language_id == language_id);
         }
     }
 }

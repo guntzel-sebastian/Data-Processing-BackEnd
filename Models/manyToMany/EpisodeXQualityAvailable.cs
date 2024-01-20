@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NetflixAPI.Models;
 
-[PrimaryKey(nameof(EpisodeId), nameof(QualityId))]
+[PrimaryKey(nameof(episode_id), nameof(quality_id))]
 public class EpisodeXQualityAvailable
 {
-    public long EpisodeId { get; set; }
-    public long QualityId { get; set; }
+    public long episode_id { get; set; }
+    public long quality_id { get; set; }
 
 }

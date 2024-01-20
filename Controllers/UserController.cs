@@ -37,10 +37,10 @@ namespace NetflixAPI.Controllers
         }
 
         // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        [HttpGet("{user_id}")]
+        public async Task<ActionResult<User>> GetUser(long user_id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.User.FindAsync(user_id);
 
             if (user == null)
             {
@@ -52,10 +52,10 @@ namespace NetflixAPI.Controllers
 
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        [HttpPut("{user_id}")]
+        public async Task<IActionResult> PutUser(long user_id, User user)
         {
-            if (id != user.Id)
+            if (user_id != user.user_id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(user_id))
                 {
                     return NotFound();
                 }
@@ -103,7 +103,7 @@ namespace NetflixAPI.Controllers
 
             foreach(User dbUser in users)
             {
-                if(user.EmailAddress == dbUser.EmailAddress)
+                if(user.email == dbUser.email)
                 {
                     return Conflict("User already exists");
                 }
@@ -112,9 +112,10 @@ namespace NetflixAPI.Controllers
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(GetUser), new { user_id = user.user_id }, user);
         }
 
+/*
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
@@ -131,7 +132,7 @@ namespace NetflixAPI.Controllers
             bool userExists = false;
             foreach(User dbUser in users)
             {
-                if(user.EmailAddress == dbUser.EmailAddress)
+                if(user.email == dbUser.email)
                 {
                     userExists = true;
                     compareUser = dbUser;
@@ -151,12 +152,13 @@ namespace NetflixAPI.Controllers
             
                         
         }
+        */
 
         // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(long id)
+        [HttpDelete("{user_id}")]
+        public async Task<IActionResult> DeleteUser(long user_id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.User.FindAsync(user_id);
             if (user == null)
             {
                 return NotFound();
@@ -168,9 +170,9 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool UserExists(long id)
+        private bool UserExists(long user_id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return _context.User.Any(e => e.user_id == user_id);
         }
 
     }

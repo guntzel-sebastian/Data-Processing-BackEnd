@@ -7,7 +7,7 @@ public partial class ContentType
     {
     }
 
-    public long Id {get; set;}
-    public required string Description {get; set;}
+    public long content_type_id {get; set;}
+    public required string description {get; set;}
  
 }

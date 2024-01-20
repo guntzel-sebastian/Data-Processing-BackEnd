@@ -6,10 +6,10 @@ public partial class Subscription
     {
     }
 
-    public long SubscriptionId {get; set;}
-    public required string SubscriptionName {get; set;}
+    public long subscription_id {get; set;}
+    public required string subscription_name {get; set;}
 
-    public required float SubscriptionCost {get; set;}
+    public required float subscription_cost {get; set;}
 
-    public virtual required IList<long> QualitiesAllowed {get; set;}
+    public virtual required IList<long> quality_id {get; set;}
 }
