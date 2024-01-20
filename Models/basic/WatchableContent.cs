@@ -9,6 +9,7 @@ public partial class WatchableContent
 
     public int Id { get; set; }
     public required string Title { get; set; }
+    public required string Description { get; set; }
     public int CountryId { get; set; } 
     public required string ReleaseDate { get; set; }
     public required int AgeRating { get; set; }
