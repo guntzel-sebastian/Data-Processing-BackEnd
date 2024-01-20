@@ -50,12 +50,9 @@ public partial class User : IValidator
     public required string email {get; set;}
     public required string password_hash {get; set;}
     public bool? activated {get; set;}
+    public bool? blocked {get; set;}
     public string? blocked_until {get; set;} // string, should probably be datetime (to prevent problems)
-    public int? SubscriptionId {get; set;}
-    public int? language_id {get; set;}
-    public IList<int>? Profiles {get; set;}
-    public IList<int>? FailedLoginAttempts {get; set;}
-    public IList<int>? UserHasInvited {get; set;}
-    public required bool UserHasBeenInvited {get; set;} // should probably not be a Collection (diagram error)
+    public required int language_id {get; set;}
+    public int? country_id {get; set;}
 
 }

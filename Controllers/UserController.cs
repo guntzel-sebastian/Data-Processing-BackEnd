@@ -95,11 +95,6 @@ namespace NetflixAPI.Controllers
         public async Task<ActionResult<User>> UserRegister(User user)
         {
 
-            if(user.UserHasBeenInvited)
-            {
-                user.UserHasBeenInvited = true;
-            }
-
             if(!user.Validate())
             {
                 return BadRequest("Invalid user data, please check your input");
