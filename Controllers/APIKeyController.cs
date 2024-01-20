@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/APIKey/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<APIKey>> GetAPIKey(long id)
+        public async Task<ActionResult<APIKey>> GetAPIKey(int id)
         {
             var aPIKey = await _context.APIKey.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/APIKey/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAPIKey(long id, APIKey aPIKey)
+        public async Task<IActionResult> PutAPIKey(int id, APIKey aPIKey)
         {
             if (id != aPIKey.Id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/APIKey/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAPIKey(long id)
+        public async Task<IActionResult> DeleteAPIKey(int id)
         {
             var aPIKey = await _context.APIKey.FindAsync(id);
             if (aPIKey == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool APIKeyExists(long id)
+        private bool APIKeyExists(int id)
         {
             return _context.APIKey.Any(e => e.Id == id);
         }

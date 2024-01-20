@@ -31,7 +31,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/PersonalOffer/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PersonalOffer>> GetPersonalOffer(long id)
+        public async Task<ActionResult<PersonalOffer>> GetPersonalOffer(int id)
         {
             var personalOffer = await _context.PersonalOffer.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/PersonalOffer/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPersonalOffer(long id, PersonalOffer personalOffer)
+        public async Task<IActionResult> PutPersonalOffer(int id, PersonalOffer personalOffer)
         {
             if (id != personalOffer.Id)
             {
@@ -87,7 +87,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/PersonalOffer/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePersonalOffer(long id)
+        public async Task<IActionResult> DeletePersonalOffer(int id)
         {
             var personalOffer = await _context.PersonalOffer.FindAsync(id);
             if (personalOffer == null)
@@ -101,7 +101,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool PersonalOfferExists(long id)
+        private bool PersonalOfferExists(int id)
         {
             return _context.PersonalOffer.Any(e => e.Id == id);
         }

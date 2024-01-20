@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/SubtitleContent/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<SubtitleContent>> GetSubtitleContent(long id)
+        public async Task<ActionResult<SubtitleContent>> GetSubtitleContent(int id)
         {
             var subtitleContent = await _context.SubtitleContent_1.FindAsync(id);
 

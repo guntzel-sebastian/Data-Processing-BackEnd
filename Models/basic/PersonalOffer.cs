@@ -7,6 +7,6 @@ public class PersonalOffer
     {
     }
 
-    public long Id { get; set; }
-    public required IList<long> Content { get; set; }
+    public int Id { get; set; }
+    public required IList<int> Content { get; set; }
 }

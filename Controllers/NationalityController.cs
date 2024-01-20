@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Nationality/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Nationality>> GetNationality(long id)
+        public async Task<ActionResult<Nationality>> GetNationality(int id)
         {
             var nationality = await _context.Nationality.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Nationality/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutNationality(long id, Nationality nationality)
+        public async Task<IActionResult> PutNationality(int id, Nationality nationality)
         {
             if (id != nationality.Id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Nationality/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNationality(long id)
+        public async Task<IActionResult> DeleteNationality(int id)
         {
             var nationality = await _context.Nationality.FindAsync(id);
             if (nationality == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool NationalityExists(long id)
+        private bool NationalityExists(int id)
         {
             return _context.Nationality.Any(e => e.Id == id);
         }

@@ -16,8 +16,8 @@ public partial class WatchableContent
     public string? cover_image { get; set; }
     public long content_type_id { get; set; }
 
-    public virtual IList<long>? Seasons { get; set; }
-    public virtual IList<long>? Episodes { get; set; }
-    public virtual IList<long>? Genres { get; set; }
-    public virtual IList<long>? Classification { get; set; }
+    public virtual IList<int>? Seasons { get; set; }
+    public virtual IList<int>? Episodes { get; set; }
+    public virtual IList<int>? Genres { get; set; }
+    public virtual IList<int>? Classification { get; set; }
 }

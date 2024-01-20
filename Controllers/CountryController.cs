@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Country/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Country>> GetCountry(long id)
+        public async Task<ActionResult<Country>> GetCountry(int id)
         {
             var country = await _context.Country.FindAsync(id);
 

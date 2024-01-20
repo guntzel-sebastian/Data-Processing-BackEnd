@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -9,11 +10,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
-using NetflixAPI.Models;
 using NuGet.Common;
+using System.Security.Claims;
+using Microsoft.Extensions.Configuration;
+
+using NetflixAPI.Models;
 
 namespace NetflixAPI.Controllers
 {
@@ -23,10 +27,12 @@ namespace NetflixAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly NetflixContext _context;
+        private readonly IConfiguration _configuration;
 
-        public UserController(NetflixContext context)
+        public UserController(NetflixContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: api/User
@@ -119,37 +125,29 @@ namespace NetflixAPI.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<JsonWebToken>> UserLogin(User user)
+        public IActionResult UserLogin(LoginUser loginUser)
         {
 
-            if(!user.Validate())
+            if(!loginUser.Validate())
             {
                 return BadRequest("Invalid email or password");
             }
 
             var users = _context.User.ToList();
-            User compareUser;
-            bool userExists = false;
             foreach(User dbUser in users)
             {
                 if(user.email == dbUser.email)
                 {
-                    userExists = true;
-                    compareUser = dbUser;
+                    if(dbUser.FailedLoginAttempts.Count >= 3)
+                    {
+                        return StatusCode(423, "User account is locked due to consecutive login failures");
+                    }
+
+                    return Ok(CreateToken(dbUser, "Admin"));
                 }
             }
 
-            if(!userExists)
-            {
-                return NotFound("User does not exist");
-            }
-
-            if(user.FailedLoginAttempts.Count >= 3)
-            {
-                return StatusCode(423, "User account is locked due to consecutive login failures");
-            }
-
-            
+            return NotFound("User does not exist");
                         
         }
         */
@@ -175,5 +173,31 @@ namespace NetflixAPI.Controllers
             return _context.User.Any(e => e.user_id == user_id);
         }
 
+        private string CreateToken(User user, string role)
+        {
+            
+            var tokenOptions = _configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.email),
+                    new Claim(ClaimTypes.Role, role)
+                }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenRaw = tokenHandler.CreateToken(tokenDescriptor);
+            var jwt = tokenHandler.WriteToken(tokenRaw);
+
+            return jwt;
+
+        }
+
     }
+
 }

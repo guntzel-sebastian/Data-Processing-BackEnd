@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Location/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Location>> GetLocation(long id)
+        public async Task<ActionResult<Location>> GetLocation(int id)
         {
             var location = await _context.Location.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Location/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLocation(long id, Location location)
+        public async Task<IActionResult> PutLocation(int id, Location location)
         {
             if (id != location.Id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Location/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLocation(long id)
+        public async Task<IActionResult> DeleteLocation(int id)
         {
             var location = await _context.Location.FindAsync(id);
             if (location == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool LocationExists(long id)
+        private bool LocationExists(int id)
         {
             return _context.Location.Any(e => e.Id == id);
         }

@@ -11,47 +11,47 @@ namespace NetflixAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PriceController : ControllerBase
+    public class GenreController : ControllerBase
     {
         private readonly NetflixContext _context;
 
-        public PriceController(NetflixContext context)
+        public GenreController(NetflixContext context)
         {
             _context = context;
         }
 
-        // GET: api/Price
+        // GET: api/Genre
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Price>>> GetPrice()
+        public async Task<ActionResult<IEnumerable<Genre>>> GetGenre()
         {
-            return await _context.Price.ToListAsync();
+            return await _context.Genre.ToListAsync();
         }
 
-        // GET: api/Price/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Price>> GetPrice(int id)
+        // GET: api/Genre/5
+        [HttpGet("{genre_id}")]
+        public async Task<ActionResult<Genre>> GetGenre(int genre_id)
         {
-            var price = await _context.Price.FindAsync(id);
+            var genre = await _context.Genre.FindAsync(genre_id);
 
-            if (price == null)
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            return price;
+            return genre;
         }
 
-        // PUT: api/Price/5
+        // PUT: api/Genre/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPrice(int id, Price price)
+        [HttpPut("{genre_id}")]
+        public async Task<IActionResult> PutGenre(int genre_id, Genre genre)
         {
-            if (id != price.Id)
+            if (genre_id != genre.genre_id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(price).State = EntityState.Modified;
+            _context.Entry(genre).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PriceExists(id))
+                if (!GenreExists(genre_id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Price
+        // POST: api/Genre
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Price>> PostPrice(Price price)
+        public async Task<ActionResult<Genre>> PostGenre(Genre genre)
         {
-            _context.Price.Add(price);
+            _context.Genre.Add(genre);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetPrice), new { id = price.Id }, price);
+            return CreatedAtAction("GetGenre", new { genre_id = genre.genre_id }, genre);
         }
 
-        // DELETE: api/Price/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePrice(int id)
+        // DELETE: api/Genre/5
+        [HttpDelete("{genre_id}")]
+        public async Task<IActionResult> DeleteGenre(int genre_id)
         {
-            var price = await _context.Price.FindAsync(id);
-            if (price == null)
+            var genre = await _context.Genre.FindAsync(genre_id);
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            _context.Price.Remove(price);
+            _context.Genre.Remove(genre);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PriceExists(int id)
+        private bool GenreExists(int genre_id)
         {
-            return _context.Price.Any(e => e.Id == id);
+            return _context.Genre.Any(e => e.genre_id == genre_id);
         }
     }
 }

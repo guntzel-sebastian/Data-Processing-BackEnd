@@ -2,9 +2,9 @@ using Newtonsoft.Json;
 
 namespace NetflixAPI.Models;
 
-public partial class User : IValidator
+public partial class LoginUser : IValidator
 {
-    public User()
+    public LoginUser()
     {
     }
 
@@ -18,7 +18,7 @@ public partial class User : IValidator
         
         try
         {
-            using HttpResponseMessage response = await httpClient.GetAsync(this.email);
+            using HttpResponseMessage response = await httpClient.GetAsync(this.EmailAddress);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             dynamic jsonResponse = JsonConvert.DeserializeObject(responseBody);
@@ -46,16 +46,7 @@ public partial class User : IValidator
 
     }
 
-    public long user_id {get; set;}
-    public required string email {get; set;}
-    public required string password_hash {get; set;}
-    public bool? activated {get; set;}
-    public string? blocked_until {get; set;} // string, should probably be datetime (to prevent problems)
-    public long? SubscriptionId {get; set;}
-    public long? language_id {get; set;}
-    public IList<long>? Profiles {get; set;}
-    public IList<long>? FailedLoginAttempts {get; set;}
-    public IList<long>? UserHasInvited {get; set;}
-    public required bool UserHasBeenInvited {get; set;} // should probably not be a Collection (diagram error)
-
+    public required string EmailAddress {get; set;}
+    public required string PasswordHash {get; set;}
+    
 }

@@ -12,6 +12,6 @@ public partial class Season
     public required string director { get; set; }
     public required string release_date { get; set; }
 
-    public virtual IList<long>? Episodes { get; set; }
+    public virtual IList<int>? Episodes { get; set; }
     
 }

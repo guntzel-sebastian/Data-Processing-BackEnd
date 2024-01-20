@@ -10,7 +10,7 @@ public partial class SubscriptionXQualityAllowed
 
     }
 
-    public long SubscriptionId {get; set;}
-    public long QualityId {get; set;}
+    public int SubscriptionId {get; set;}
+    public int QualityId {get; set;}
 
 }
