@@ -7,7 +7,7 @@ public partial class APIKey
     {
     }
 
-    public long Id {get; set;}
+    public int Id {get; set;}
     public required string Key {get; set;}
 
 }

@@ -5,7 +5,7 @@ namespace NetflixAPI.Models;
 [PrimaryKey(nameof(WatchableContentId), nameof(ClassificationId))]
 public class ContentXClassification
 {
-    public long WatchableContentId { get; set; }
-    public long ClassificationId { get; set; }
+    public int WatchableContentId { get; set; }
+    public int ClassificationId { get; set; }
 
 }

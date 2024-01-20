@@ -31,7 +31,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Profile/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Profile>> GetProfile(long id)
+        public async Task<ActionResult<Profile>> GetProfile(int id)
         {
             var profile = await _context.Profile.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Profile/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProfile(long id, Profile profile)
+        public async Task<IActionResult> PutProfile(int id, Profile profile)
         {
             if (id != profile.ProfileId)
             {
@@ -87,7 +87,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Profile/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProfile(long id)
+        public async Task<IActionResult> DeleteProfile(int id)
         {
             var profile = await _context.Profile.FindAsync(id);
             if (profile == null)
@@ -101,7 +101,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool ProfileExists(long id)
+        private bool ProfileExists(int id)
         {
             return _context.Profile.Any(e => e.ProfileId == id);
         }

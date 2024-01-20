@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/WatchableContent/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<WatchableContent>> GetWatchableContent(long id)
+        public async Task<ActionResult<WatchableContent>> GetWatchableContent(int id)
         {
             var watchableContent = await _context.WatchableContent_1.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/WatchableContent/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWatchableContent(long id, WatchableContent watchableContent)
+        public async Task<IActionResult> PutWatchableContent(int id, WatchableContent watchableContent)
         {
             if (id != watchableContent.Id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/WatchableContent/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteWatchableContent(long id)
+        public async Task<IActionResult> DeleteWatchableContent(int id)
         {
             var watchableContent = await _context.WatchableContent_1.FindAsync(id);
             if (watchableContent == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool WatchableContentExists(long id)
+        private bool WatchableContentExists(int id)
         {
             return _context.WatchableContent_1.Any(e => e.Id == id);
         }

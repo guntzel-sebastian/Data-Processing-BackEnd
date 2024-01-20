@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Price/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Price>> GetPrice(long id)
+        public async Task<ActionResult<Price>> GetPrice(int id)
         {
             var price = await _context.Price.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Price/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPrice(long id, Price price)
+        public async Task<IActionResult> PutPrice(int id, Price price)
         {
             if (id != price.Id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Price/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePrice(long id)
+        public async Task<IActionResult> DeletePrice(int id)
         {
             var price = await _context.Price.FindAsync(id);
             if (price == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool PriceExists(long id)
+        private bool PriceExists(int id)
         {
             return _context.Price.Any(e => e.Id == id);
         }

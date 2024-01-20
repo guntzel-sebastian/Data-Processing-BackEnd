@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Classification/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Classification>> GetClassification(long id)
+        public async Task<ActionResult<Classification>> GetClassification(int id)
         {
             var classification = await _context.Classification.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Classification/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClassification(long id, Classification classification)
+        public async Task<IActionResult> PutClassification(int id, Classification classification)
         {
             if (id != classification.Id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Classification/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClassification(long id)
+        public async Task<IActionResult> DeleteClassification(int id)
         {
             var classification = await _context.Classification.FindAsync(id);
             if (classification == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool ClassificationExists(long id)
+        private bool ClassificationExists(int id)
         {
             return _context.Classification.Any(e => e.Id == id);
         }

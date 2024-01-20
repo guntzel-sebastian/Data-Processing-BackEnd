@@ -7,14 +7,14 @@ public partial class Episode
     {
     }
     
-    public long Id { get; set; }
-    public long ContentId { get; set; }
-    public long SeasonId { get; set; }
+    public int Id { get; set; }
+    public int ContentId { get; set; }
+    public int SeasonId { get; set; }
     public required string EpisodeName { get; set; }
     public int ContentIndex { get; set; }
     public required int Length { get; set; }
 
-    public virtual IList<long>? EpisodeQuality { get; set; }
-    public virtual IList<long>? Subtitles { get; set; }
+    public virtual IList<int>? EpisodeQuality { get; set; }
+    public virtual IList<int>? Subtitles { get; set; }
    
 }

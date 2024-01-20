@@ -9,7 +9,7 @@ public partial class ProfileXContentTypePreference
     {
     }
 
-    public long ProfileId {get; set;}
-    public long ContentTypeId {get; set;} // should be content type id
+    public int ProfileId {get; set;}
+    public int ContentTypeId {get; set;} // should be content type id
 
 }

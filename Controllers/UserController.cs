@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.User.FindAsync(id);
 
@@ -59,7 +59,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
             {
@@ -152,7 +152,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(long id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await _context.User.FindAsync(id);
             if (user == null)
@@ -166,7 +166,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool UserExists(long id)
+        private bool UserExists(int id)
         {
             return _context.User.Any(e => e.Id == id);
         }

@@ -31,7 +31,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Preference/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Preference>> GetPreference(long id)
+        public async Task<ActionResult<Preference>> GetPreference(int id)
         {
             var preference = await _context.Preference.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Preference/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPreference(long id, Preference preference)
+        public async Task<IActionResult> PutPreference(int id, Preference preference)
         {
             if (id != preference.Id)
             {
@@ -87,7 +87,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Preference/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePreference(long id)
+        public async Task<IActionResult> DeletePreference(int id)
         {
             var preference = await _context.Preference.FindAsync(id);
             if (preference == null)
@@ -101,7 +101,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool PreferenceExists(long id)
+        private bool PreferenceExists(int id)
         {
             return _context.Preference.Any(e => e.Id == id);
         }

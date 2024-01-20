@@ -7,9 +7,9 @@ public partial class Subtitle
     {
     }
 
-    public long Id { get; set; }
-    public long ProfileId { get; set; }
-    public long LanguageId { get; set; }
+    public int Id { get; set; }
+    public int ProfileId { get; set; }
+    public int LanguageId { get; set; }
     public required string Size { get; set; }
     public required string Color { get; set; }
 

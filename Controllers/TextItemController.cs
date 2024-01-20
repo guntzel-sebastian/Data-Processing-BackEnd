@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/TextItem/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TextItem>> GetTextItem(long id)
+        public async Task<ActionResult<TextItem>> GetTextItem(int id)
         {
             var textItem = await _context.TextItem.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/TextItem/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTextItem(long id, TextItem textItem)
+        public async Task<IActionResult> PutTextItem(int id, TextItem textItem)
         {
             if (id != textItem.Id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/TextItem/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTextItem(long id)
+        public async Task<IActionResult> DeleteTextItem(int id)
         {
             var textItem = await _context.TextItem.FindAsync(id);
             if (textItem == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool TextItemExists(long id)
+        private bool TextItemExists(int id)
         {
             return _context.TextItem.Any(e => e.Id == id);
         }

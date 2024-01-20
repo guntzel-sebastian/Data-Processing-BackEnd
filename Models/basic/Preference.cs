@@ -7,8 +7,8 @@ public partial class Preference
     {
     }
 
-    public long Id { get; set; }
-    public required IList<long> Genres { get; set; }
-    public required IList<long> ContentTypes { get; set; }
-    public required IList<long> Classifications { get; set; }
+    public int Id { get; set; }
+    public required IList<int> Genres { get; set; }
+    public required IList<int> ContentTypes { get; set; }
+    public required IList<int> Classifications { get; set; }
 }

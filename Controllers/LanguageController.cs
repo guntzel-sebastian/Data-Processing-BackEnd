@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Language/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Language>> GetLanguage(long id)
+        public async Task<ActionResult<Language>> GetLanguage(int id)
         {
             var language = await _context.Language.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         // PUT: api/Language/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLanguage(long id, Language language)
+        public async Task<IActionResult> PutLanguage(int id, Language language)
         {
             if (id != language.Id)
             {
@@ -85,7 +85,7 @@ namespace NetflixAPI.Controllers
 
         // DELETE: api/Language/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLanguage(long id)
+        public async Task<IActionResult> DeleteLanguage(int id)
         {
             var language = await _context.Language.FindAsync(id);
             if (language == null)
@@ -99,7 +99,7 @@ namespace NetflixAPI.Controllers
             return NoContent();
         }
 
-        private bool LanguageExists(long id)
+        private bool LanguageExists(int id)
         {
             return _context.Language.Any(e => e.Id == id);
         }

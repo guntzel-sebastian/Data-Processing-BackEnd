@@ -7,6 +7,6 @@ public partial class Price
     {
     }
 
-    public long Id { get; set; }
+    public int Id { get; set; }
     public required double Value { get; set; }
 }

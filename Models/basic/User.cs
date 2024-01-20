@@ -46,16 +46,16 @@ public partial class User : IValidator
 
     }
 
-    public long Id {get; set;}
+    public int Id {get; set;}
     public required string EmailAddress {get; set;}
     public required string PasswordHash {get; set;}
     public bool? Activated {get; set;}
     public string? BlockedUntil {get; set;} // string, should probably be datetime (to prevent problems)
-    public long? SubscriptionId {get; set;}
-    public long? LanguageId {get; set;}
-    public IList<long>? Profiles {get; set;}
-    public IList<long>? FailedLoginAttempts {get; set;}
-    public IList<long>? UserHasInvited {get; set;}
+    public int? SubscriptionId {get; set;}
+    public int? LanguageId {get; set;}
+    public IList<int>? Profiles {get; set;}
+    public IList<int>? FailedLoginAttempts {get; set;}
+    public IList<int>? UserHasInvited {get; set;}
     public required bool UserHasBeenInvited {get; set;} // should probably not be a Collection (diagram error)
 
 }

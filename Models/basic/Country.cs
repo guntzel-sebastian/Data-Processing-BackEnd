@@ -7,7 +7,7 @@ public partial class Country
     {
     }
 
-    public long Id { get; set; }
+    public int Id { get; set; }
     public required string Name { get; set; }
     
 }

@@ -10,7 +10,7 @@ public partial class UserHasInvited
 
     }
 
-    public long UserId {get; set;}
-    public long UserId_0 {get; set;} // should be renamed to InvitedUserId 
+    public int UserId {get; set;}
+    public int UserId_0 {get; set;} // should be renamed to InvitedUserId 
 
 }
