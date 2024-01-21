@@ -29,6 +29,7 @@ public class NetflixContext : DbContext
     public DbSet<Classification> Classification { get; set; } = null!;
     public DbSet<APIKey> APIKey { get; set; } = null!;
     public DbSet<UserSubscriptionView> UserSubscriptionView { get; set; } = null!;
+    public DbSet<GetTotalDailyRevenue> GetTotalDailyRevenue { get; set; } = null!;
 
 public DbSet<NetflixAPI.Models.WatchableContent> WatchableContent_1 { get; set; } = default!;
 
@@ -56,6 +57,7 @@ public DbSet<NetflixAPI.Models.SubtitleContent> SubtitleContent_1 { get; set; } 
         modelBuilder.Entity<TextItem>().HasKey(x => x.text_item_id);
         modelBuilder.Entity<ContentType>().HasKey(x => x.content_type_id);
         modelBuilder.Entity<SubtitleContent>().HasKey(x => x.subtitle_id);
+        modelBuilder.Entity<GetTotalDailyRevenue>().HasNoKey();
 
         base.OnModelCreating(modelBuilder);
     }
