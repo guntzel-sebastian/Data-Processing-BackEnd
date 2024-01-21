@@ -40,7 +40,7 @@ namespace NetflixAPI.Controllers
             }
 
             headers.TryGetValue("userRole", out StringValues userRole);
-            if (!userRole.Equals("Senior") || !userRole.Equals("Medior") || !userRole.Equals("Junior") || !userRole.Equals("Admin"))
+            if (!userRole.Equals("Senior") && !userRole.Equals("Medior") && !userRole.Equals("Junior") && !userRole.Equals("Admin"))
             {
                 return StatusCode(403, "User lacks required privileges");
             }
