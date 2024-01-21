@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Data;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,7 @@ using Microsoft.IdentityModel.JsonWebTokens;
 using NetflixAPI.Models;
 using NuGet.Common;
 using Microsoft.Extensions.Primitives;
+using Microsoft.Data.SqlClient;
 
 namespace NetflixAPI.Controllers
 {
@@ -59,8 +61,10 @@ namespace NetflixAPI.Controllers
                 return Unauthorized("Login has expired, please log in again");
             }
 
-            DateTime date = DateTime.Now;
-            return await _context.GetTotalDailyRevenue.FromSql($"EXECUTE dbo.sp_GetRevenueByDay 1").ToListAsync();
+            var result = _context.Database
+            .ExecuteSqlRaw("EXEC dbo.sp_GetRevenueByDay @days",
+            new SqlParameter("@days", SqlDbType.Int) { Value = 30 });
+            return Ok(result);
         }
 
     }
