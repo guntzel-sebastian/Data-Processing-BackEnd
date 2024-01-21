@@ -46,7 +46,29 @@ namespace NetflixAPI.Controllers
             return await _context.UserSubscriptionView.ToListAsync();
         }
 
+        // GET: statistics/subscriptions/users
+        [HttpGet]
+        [Route("statistics/revenue/daily")]
+        public async Task<ActionResult<IEnumerable<UserSubscriptionView>>> GetTotalDailyRevenue()
+        {
+            var headers = HttpContext.Request.Headers;
 
+            headers.TryGetValue("token", out StringValues token);
+            if (token == "false")
+            {
+                return Unauthorized("Login has expired, please log in again");
+            }
+
+            headers.TryGetValue("userRole", out StringValues userRole);
+            if (!userRole.Equals("Senior") || !userRole.Equals("Medior") || !userRole.Equals("Junior") || !userRole.Equals("Admin"))
+            {
+                return StatusCode(403, "User lacks required privileges");
+            }
+
+            DateTime date = DateTime.Now;
+            FormattableString query = ("EXECUTE dbo.GetTotalDailyRevenue {0}", date.ToString);
+            return await _context.UserSubscriptionView.FromSql(query).ToListAsync();
+        }
 
     }
 }
