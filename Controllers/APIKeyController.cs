@@ -31,27 +31,27 @@ namespace NetflixAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<APIKey>> GetAPIKey(int id)
         {
-            var aPIKey = await _context.APIKey.FindAsync(id);
+            var APIKey = await _context.APIKey.FindAsync(id);
 
-            if (aPIKey == null)
+            if (APIKey == null)
             {
                 return NotFound();
             }
 
-            return aPIKey;
+            return APIKey;
         }
 
         // PUT: api/APIKey/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAPIKey(int id, APIKey aPIKey)
+        public async Task<IActionResult> PutAPIKey(int id, APIKey APIKey)
         {
-            if (id != aPIKey.Id)
+            if (id != APIKey.api_key_id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(aPIKey).State = EntityState.Modified;
+            _context.Entry(APIKey).State = EntityState.Modified;
 
             try
             {
@@ -75,25 +75,25 @@ namespace NetflixAPI.Controllers
         // POST: api/APIKey
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<APIKey>> PostAPIKey(APIKey aPIKey)
+        public async Task<ActionResult<APIKey>> PostAPIKey(APIKey APIKey)
         {
-            _context.APIKey.Add(aPIKey);
+            _context.APIKey.Add(APIKey);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAPIKey", new { id = aPIKey.Id }, aPIKey);
+            return CreatedAtAction("GetAPIKey", new { id = APIKey.api_key_id }, APIKey);
         }
 
         // DELETE: api/APIKey/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAPIKey(int id)
         {
-            var aPIKey = await _context.APIKey.FindAsync(id);
-            if (aPIKey == null)
+            var APIKey = await _context.APIKey.FindAsync(id);
+            if (APIKey == null)
             {
                 return NotFound();
             }
 
-            _context.APIKey.Remove(aPIKey);
+            _context.APIKey.Remove(APIKey);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace NetflixAPI.Controllers
 
         private bool APIKeyExists(int id)
         {
-            return _context.APIKey.Any(e => e.Id == id);
+            return _context.APIKey.Any(e => e.api_key_id == id);
         }
     }
 }
