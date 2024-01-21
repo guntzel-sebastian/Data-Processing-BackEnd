@@ -77,6 +77,12 @@ namespace NetflixAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<WatchableContent>> PostWatchableContent(WatchableContent watchableContent)
         {
+
+            if(!watchableContent.Validate())
+            {
+                return BadRequest("Invalid data, please check your input");
+            }
+
             _context.WatchableContent_1.Add(watchableContent);
             await _context.SaveChangesAsync();
 

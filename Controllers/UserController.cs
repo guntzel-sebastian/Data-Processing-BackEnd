@@ -104,7 +104,7 @@ namespace NetflixAPI.Controllers
 
             foreach(User dbUser in users)
             {
-                if(user.email == dbUser.email)
+                if(user.email.Equals(dbUser.email))
                 {
                     return Conflict("User already exists");
                 }
