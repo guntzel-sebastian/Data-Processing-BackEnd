@@ -23,7 +23,6 @@ public class NetflixContext : DbContext
     public DbSet<FailedLoginAttempt> FailedLoginAttempt { get; set; } = null!;
     public DbSet<Language> Language { get; set; } = null!;
     public DbSet<PersonalOffer> PersonalOffer { get; set; } = null!;
-    public DbSet<Price> Price { get; set; } = null!;
     public DbSet<Profile> Profile { get; set; } = null!;
     public DbSet<Subscription> Subscription { get; set; } = null!;
     public DbSet<TextItem> TextItem { get; set; } = null!;
@@ -42,6 +41,7 @@ public DbSet<NetflixAPI.Models.SubtitleContent> SubtitleContent_1 { get; set; } 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Country>().HasKey(x => x.country_id);
+        modelBuilder.Entity<APIKey>().HasKey(x => x.api_key_id);
         modelBuilder.Entity<User>().HasKey(x => x.user_id);
         modelBuilder.Entity<Subscription>().HasKey(x => x.subscription_id);
         modelBuilder.Entity<Quality>().HasKey(x => x.quality_id);
