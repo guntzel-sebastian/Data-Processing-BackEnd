@@ -35,7 +35,7 @@ builder.Services.AddControllers()
     .AddXmlDataContractSerializerFormatters(); //XmlSerializer doesn't like lists
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddDbContext<NetflixContext>(opt =>
-    opt.UseSqlServer("Server=localhost;Database=Netflix;Trusted_Connection=True;TrustServerCertificate=true;"));
+    opt.UseSqlServer("Server=localhost;Database=Netflix;User Id=APIUSER;Password=ASDF;TrustServerCertificate=true;"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
@@ -48,8 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-if (!app.Environment.IsDevelopment())
+else
 {
     app.UseExceptionHandler("/error");
 }
