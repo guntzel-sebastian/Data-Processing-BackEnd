@@ -116,7 +116,7 @@ namespace NetflixAPI.Controllers
             return CreatedAtAction(nameof(GetUser), new { user_id = user.user_id }, user);
         }
 
-/*
+
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
@@ -131,9 +131,11 @@ namespace NetflixAPI.Controllers
             var users = _context.User.ToList();
             foreach(User dbUser in users)
             {
-                if(user.email == dbUser.email)
+                if(loginUser.email == dbUser.email)
                 {
-                    if(dbUser.FailedLoginAttempts.Count >= 3)
+                    var loginAttempts = _context.User.Where(u => u.email == dbUser.email).ToList();
+
+                    if(loginAttempts.Count >= 3)
                     {
                         return StatusCode(423, "User account is locked due to consecutive login failures");
                     }
@@ -145,7 +147,7 @@ namespace NetflixAPI.Controllers
             return NotFound("User does not exist");
                         
         }
-        */
+        
 
         // DELETE: api/User/5
         [HttpDelete("{user_id}")]

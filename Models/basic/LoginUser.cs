@@ -18,7 +18,7 @@ public partial class LoginUser : IValidator
         
         try
         {
-            using HttpResponseMessage response = await httpClient.GetAsync(this.EmailAddress);
+            using HttpResponseMessage response = await httpClient.GetAsync(this.email);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             dynamic jsonResponse = JsonConvert.DeserializeObject(responseBody);
@@ -46,7 +46,7 @@ public partial class LoginUser : IValidator
 
     }
 
-    public required string EmailAddress {get; set;}
-    public required string PasswordHash {get; set;}
+    public required string email {get; set;}
+    public required string password_hash {get; set;}
     
 }
