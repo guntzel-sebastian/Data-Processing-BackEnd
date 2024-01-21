@@ -15,11 +15,11 @@ using Microsoft.Extensions.Primitives;
 namespace NetflixAPI.Controllers
 {
     [ApiController]
-    public class UserSubscriptionViewController : ControllerBase
+    public class StatisticsController : ControllerBase
     {
         private readonly NetflixContext _context;
 
-        public UserSubscriptionViewController(NetflixContext context)
+        public StatisticsController(NetflixContext context)
         {
             _context = context;
         }
@@ -38,13 +38,15 @@ namespace NetflixAPI.Controllers
             }
 
             headers.TryGetValue("userRole", out StringValues userRole);
-            if (!userRole.Equals("Senior"))
+            if (!userRole.Equals("Senior") || !userRole.Equals("Medior") || !userRole.Equals("Junior") || !userRole.Equals("Admin"))
             {
                 return StatusCode(403, "User lacks required privileges");
             }
 
             return await _context.UserSubscriptionView.ToListAsync();
         }
+
+
 
     }
 }
