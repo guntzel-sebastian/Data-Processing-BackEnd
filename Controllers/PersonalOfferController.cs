@@ -24,16 +24,16 @@ namespace NetflixAPI.Controllers
 
         // GET: api/PersonalOffer
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PersonalOffer>>> GetPersonalOffer()
+        public async Task<ActionResult<IEnumerable<WatchableContent>>> GetPersonalOffer()
         {
-            return await _context.PersonalOffer.ToListAsync();
+            return await _context.WatchableContent.ToListAsync();
         }
 
         // GET: api/PersonalOffer/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PersonalOffer>> GetPersonalOffer(int id)
+        public async Task<ActionResult<WatchableContent>> GetPersonalOffer(int id)
         {
-            var personalOffer = await _context.PersonalOffer.FindAsync(id);
+            var personalOffer = await _context.WatchableContent.FindAsync(id);
 
             if (personalOffer == null)
             {
@@ -47,13 +47,13 @@ namespace NetflixAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePersonalOffer(int id)
         {
-            var personalOffer = await _context.PersonalOffer.FindAsync(id);
+            var personalOffer = await _context.WatchableContent.FindAsync(id);
             if (personalOffer == null)
             {
                 return NotFound();
             }
 
-            _context.PersonalOffer.Remove(personalOffer);
+            _context.WatchableContent.Remove(personalOffer);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
 
         private bool PersonalOfferExists(int id)
         {
-            return _context.PersonalOffer.Any(e => e.Id == id);
+            return _context.WatchableContent.Any(e => e.content_id == id);
         }
     }
 }
