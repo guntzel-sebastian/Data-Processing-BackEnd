@@ -1,6 +1,8 @@
+using System.IO;
+
 namespace NetflixAPI.Models;
 
-public partial class WatchableContent
+public partial class WatchableContent : IValidator
 {
 
     public WatchableContent()
@@ -17,4 +19,15 @@ public partial class WatchableContent
     public required string cover_image { get; set; }
     public int content_type_id { get; set; }
 
+    public bool Validate()
+    {
+
+        if(cover_image.IndexOfAny(Path.GetInvalidPathChars()) == -1)
+        {
+            return false;
+        }
+
+        return true;
+
+    }
 }
