@@ -22,10 +22,7 @@ public class NetflixContext : DbContext
     public DbSet<Country> Country { get; set; } = null!;
     public DbSet<FailedLoginAttempt> FailedLoginAttempt { get; set; } = null!;
     public DbSet<Language> Language { get; set; } = null!;
-    public DbSet<Location> Location { get; set; } = null!;
-    public DbSet<Nationality> Nationality { get; set; } = null!;
     public DbSet<PersonalOffer> PersonalOffer { get; set; } = null!;
-    public DbSet<Preference> Preference { get; set; } = null!;
     public DbSet<Price> Price { get; set; } = null!;
     public DbSet<Profile> Profile { get; set; } = null!;
     public DbSet<Subscription> Subscription { get; set; } = null!;
