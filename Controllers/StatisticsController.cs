@@ -29,7 +29,7 @@ namespace NetflixAPI.Controllers
         // GET: statistics/subscriptions/users
         [HttpGet]
         [Route("statistics/subscriptions/users")]
-        public async Task<ActionResult<IEnumerable<UserSubscriptionView>>> GetStatistics()
+        public async Task<ActionResult<IEnumerable<SubscriptionUserView>>> GetStatistics()
         {
             var headers = HttpContext.Request.Headers;
 
@@ -45,7 +45,7 @@ namespace NetflixAPI.Controllers
                 return StatusCode(403, "User lacks required privileges");
             }
 
-            return await _context.UserSubscriptionView.ToListAsync();
+            return await _context.SubscriptionUserView.ToListAsync();
         }
 
         // GET: statistics/revenue/daily

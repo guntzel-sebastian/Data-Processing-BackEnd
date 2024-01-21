@@ -11,5 +11,4 @@ public partial class Season
     public required string director { get; set; }
     public required DateTime release_date { get; set; }
 
-    
 }
