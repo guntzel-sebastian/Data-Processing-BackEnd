@@ -9,7 +9,7 @@ public partial class Season
 
     public int season_id { get; set; }
     public required string director { get; set; }
-    public required string release_date { get; set; }
+    public required DateTime release_date { get; set; }
 
     
 }
