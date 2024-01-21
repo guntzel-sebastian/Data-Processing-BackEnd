@@ -43,48 +43,6 @@ namespace NetflixAPI.Controllers
             return personalOffer;
         }
 
-        // PUT: api/PersonalOffer/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPersonalOffer(int id, PersonalOffer personalOffer)
-        {
-            if (id != personalOffer.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(personalOffer).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PersonalOfferExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/PersonalOffer
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<PersonalOffer>> PostPersonalOffer(PersonalOffer personalOffer)
-        {
-            _context.PersonalOffer.Add(personalOffer);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetPersonalOffer), new { id = personalOffer.Id }, personalOffer);
-        }
-
         // DELETE: api/PersonalOffer/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePersonalOffer(int id)
