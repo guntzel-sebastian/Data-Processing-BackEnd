@@ -37,7 +37,7 @@ namespace NetflixAPI.Controllers
 
             if (profile == null)
             {
-                return NotFound();
+                return NotFound("profile does not exist");
             }
 
             return profile;
@@ -50,7 +50,7 @@ namespace NetflixAPI.Controllers
         {
             if (profile_id != profile.profile_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match with profile object");
             }
 
             _context.Entry(profile).State = EntityState.Modified;
@@ -63,7 +63,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!ProfileExists(profile_id))
                 {
-                    return NotFound();
+                    return NotFound("profile does not exist");
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace NetflixAPI.Controllers
             var profile = await _context.Profile.FindAsync(profile_id);
             if (profile == null)
             {
-                return NotFound();
+                return NotFound("profile does not exist");
             }
 
             _context.Profile.Remove(profile);

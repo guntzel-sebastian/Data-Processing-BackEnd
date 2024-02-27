@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (season == null)
             {
-                return NotFound();
+                return NotFound("season does not exist");
             }
 
             return season;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (season_id != season.season_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match season object");
             }
 
             _context.Entry(season).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!SeasonExists(season_id))
                 {
-                    return NotFound();
+                    return NotFound("season does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var season = await _context.Season_1.FindAsync(season_id);
             if (season == null)
             {
-                return NotFound();
+                return NotFound("season does not exist");
             }
 
             _context.Season_1.Remove(season);

@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (subtitleContent == null)
             {
-                return NotFound();
+                return NotFound("subtitle does not exist");
             }
 
             return subtitleContent;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (subtitle_id != subtitleContent.subtitle_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match subtitle object");
             }
 
             _context.Entry(subtitleContent).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!SubtitleContentExists(subtitle_id))
                 {
-                    return NotFound();
+                    return NotFound("subtitle does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var subtitleContent = await _context.SubtitleContent_1.FindAsync(subtitle_id);
             if (subtitleContent == null)
             {
-                return NotFound();
+                return NotFound("subtitle does not exist");
             }
 
             _context.SubtitleContent_1.Remove(subtitleContent);

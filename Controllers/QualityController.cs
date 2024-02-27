@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (quality == null)
             {
-                return NotFound();
+                return NotFound("quality does not exist");
             }
 
             return quality;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (quality_id != quality.quality_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match quality object");
             }
 
             _context.Entry(quality).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!QualityExists(quality_id))
                 {
-                    return NotFound();
+                    return NotFound("quality does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var quality = await _context.Quality.FindAsync(quality_id);
             if (quality == null)
             {
-                return NotFound();
+                return NotFound("quality does not exist");
             }
 
             _context.Quality.Remove(quality);

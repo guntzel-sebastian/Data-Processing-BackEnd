@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (country == null)
             {
-                return NotFound();
+                return NotFound("country does not exist");
             }
 
             return country;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (country_id != country.country_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match with country object");
             }
 
             _context.Entry(country).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!CountryExists(country_id))
                 {
-                    return NotFound();
+                    return NotFound("country does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var country = await _context.Country.FindAsync(country_id);
             if (country == null)
             {
-                return NotFound();
+                return NotFound("country does not exist");
             }
 
             _context.Country.Remove(country);

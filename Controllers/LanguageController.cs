@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (language == null)
             {
-                return NotFound();
+                return NotFound("language does not exist");
             }
 
             return language;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (language_id != language.language_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match with language object");
             }
 
             _context.Entry(language).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!LanguageExists(language_id))
                 {
-                    return NotFound();
+                    return NotFound("language does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var language = await _context.Language.FindAsync(language_id);
             if (language == null)
             {
-                return NotFound();
+                return NotFound("language does not exist");
             }
 
             _context.Language.Remove(language);
