@@ -140,7 +140,14 @@ namespace NetflixAPI.Controllers
                         return StatusCode(423, "User account is locked due to consecutive login failures");
                     }
 
-                    return Ok(CreateToken(dbUser, "Admin"));
+                    if(loginUser.password_hash == dbUser.password_hash) // add authorization later
+                    {
+                        return Ok(CreateToken(dbUser, "Admin"));
+                    }
+                    else
+                    {
+                        return StatusCode(401, "password does not match");
+                    }
                 }
             }
 
