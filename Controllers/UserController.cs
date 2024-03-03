@@ -145,7 +145,7 @@ namespace NetflixAPI.Controllers
                 }
                 else
                 {
-                    return StatusCode(401, "Login failed, invalid email or password");
+                    Unauthorized("Login failed, invalid email or password");
                 }
             }
 
