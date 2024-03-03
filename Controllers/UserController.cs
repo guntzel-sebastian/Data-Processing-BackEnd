@@ -100,14 +100,17 @@ namespace NetflixAPI.Controllers
                 return BadRequest("Invalid user data, please check your input");
             }
 
-            var users = _context.User.ToList();
-
-            foreach(User dbUser in users)
+            if(!ModelState.IsValid)
             {
-                if(user.email.Equals(dbUser.email))
-                {
-                    return Conflict("User already exists");
-                }
+                return BadRequest("Some required input fields are missing");
+            }
+
+            var emailExists = _context.User.Any(dbUser => user.email==user.email);
+
+            if(emailExists)
+            {
+                // Saying email does/does not exist allows for datamining
+                return Conflict("Email or password is invalid");
             }
 
             _context.User.Add(user);
