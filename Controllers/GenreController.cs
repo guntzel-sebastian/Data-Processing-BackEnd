@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (genre == null)
             {
-                return NotFound();
+                return NotFound("genre does not exist");
             }
 
             return genre;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (genre_id != genre.genre_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match with genre object");
             }
 
             _context.Entry(genre).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!GenreExists(genre_id))
                 {
-                    return NotFound();
+                    return NotFound("genre does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var genre = await _context.Genre.FindAsync(genre_id);
             if (genre == null)
             {
-                return NotFound();
+                return NotFound("genre does not exist");
             }
 
             _context.Genre.Remove(genre);

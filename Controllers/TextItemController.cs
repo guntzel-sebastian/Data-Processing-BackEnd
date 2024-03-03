@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (textItem == null)
             {
-                return NotFound();
+                return NotFound("text item not found");
             }
 
             return textItem;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (text_item_id != textItem.text_item_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match with text item object");
             }
 
             _context.Entry(textItem).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!TextItemExists(text_item_id))
                 {
-                    return NotFound();
+                    return NotFound("text item not found");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var textItem = await _context.TextItem.FindAsync(text_item_id);
             if (textItem == null)
             {
-                return NotFound();
+                return NotFound("text item not found");
             }
 
             _context.TextItem.Remove(textItem);

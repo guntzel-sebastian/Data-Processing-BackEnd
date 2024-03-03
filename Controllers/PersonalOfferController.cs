@@ -37,7 +37,7 @@ namespace NetflixAPI.Controllers
 
             if (personalOffer == null)
             {
-                return NotFound();
+                return NotFound("offer does not exist");
             }
 
             return personalOffer;
@@ -50,7 +50,7 @@ namespace NetflixAPI.Controllers
             var personalOffer = await _context.WatchableContent.FindAsync(id);
             if (personalOffer == null)
             {
-                return NotFound();
+                return NotFound("offer does not exist");
             }
 
             _context.WatchableContent.Remove(personalOffer);

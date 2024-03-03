@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (episode == null)
             {
-                return NotFound();
+                return NotFound("episode does not exist");
             }
 
             return episode;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (episode_id != episode.episode_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match episode object");
             }
 
             _context.Entry(episode).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!EpisodeExists(episode_id))
                 {
-                    return NotFound();
+                    return NotFound("episode does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var episode = await _context.Episode_1.FindAsync(episode_id);
             if (episode == null)
             {
-                return NotFound();
+                return NotFound("episode does not exist");
             }
 
             _context.Episode_1.Remove(episode);

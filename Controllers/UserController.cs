@@ -50,7 +50,7 @@ namespace NetflixAPI.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                return NotFound("user does not exist");
             }
 
             return user;
@@ -63,7 +63,7 @@ namespace NetflixAPI.Controllers
         {
             if (user_id != user.user_id)
             {
-                return BadRequest();
+                return BadRequest("entered user ID does not match with the entered user information. please ensure all information is matching");
             }
 
             _context.Entry(user).State = EntityState.Modified;
@@ -76,11 +76,11 @@ namespace NetflixAPI.Controllers
             {
                 if (!UserExists(user_id))
                 {
-                    return NotFound();
+                    return NotFound("user does not exist");
                 }
                 else
                 {
-                    throw;
+                    return StatusCode(500, "internal concurrency server error has occurred. please try again later.");
                 }
             }
 
@@ -97,7 +97,7 @@ namespace NetflixAPI.Controllers
 
             if(!user.Validate())
             {
-                return BadRequest("Invalid user data, please check your input");
+                return BadRequest("Invalid email address, please check your input");
             }
 
             if(!ModelState.IsValid)
@@ -128,7 +128,7 @@ namespace NetflixAPI.Controllers
 
             if(!loginUser.Validate())
             {
-                return BadRequest("Invalid email or password");
+                return BadRequest("Invalid email");
             }
 
             var users = _context.User.ToList();
@@ -143,7 +143,14 @@ namespace NetflixAPI.Controllers
                         return StatusCode(423, "User account is locked due to consecutive login failures");
                     }
 
-                    return Ok(CreateToken(dbUser, "Admin"));
+                    if(loginUser.password_hash == dbUser.password_hash) // add authorization later
+                    {
+                        return Ok(CreateToken(dbUser, "Admin"));
+                    }
+                    else
+                    {
+                        return StatusCode(401, "password does not match");
+                    }
                 }
             }
 
@@ -159,7 +166,7 @@ namespace NetflixAPI.Controllers
             var user = await _context.User.FindAsync(user_id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("user does not exist");
             }
 
             _context.User.Remove(user);

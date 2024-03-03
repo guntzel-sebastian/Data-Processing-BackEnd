@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (classification == null)
             {
-                return NotFound();
+                return NotFound("classification does not exist");
             }
 
             return classification;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (classification_id != classification.classification_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match classification, please ensure these match");
             }
 
             _context.Entry(classification).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!ClassificationExists(classification_id))
                 {
-                    return NotFound();
+                    return NotFound("classification does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var classification = await _context.Classification.FindAsync(classification_id);
             if (classification == null)
             {
-                return NotFound();
+                return NotFound("classification does not exist");
             }
 
             _context.Classification.Remove(classification);

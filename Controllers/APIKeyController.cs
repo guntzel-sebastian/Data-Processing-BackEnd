@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (APIKey == null)
             {
-                return NotFound();
+                return NotFound("API key does not exist");
             }
 
             return APIKey;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (id != APIKey.api_key_id)
             {
-                return BadRequest();
+                return BadRequest("Entered ID does not match recieved APIKey, please ensure this information matches");
             }
 
             _context.Entry(APIKey).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!APIKeyExists(id))
                 {
-                    return NotFound();
+                    return NotFound("API key does not exist");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace NetflixAPI.Controllers
             var APIKey = await _context.APIKey.FindAsync(id);
             if (APIKey == null)
             {
-                return NotFound();
+                return NotFound("API key does not exist");
             }
 
             _context.APIKey.Remove(APIKey);

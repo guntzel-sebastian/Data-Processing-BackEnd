@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (subscription == null)
             {
-                return NotFound();
+                return NotFound("subscription does not exist");
             }
 
             return subscription;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (subscription_id != subscription.subscription_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match with subscription object");
             }
 
             _context.Entry(subscription).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!SubscriptionExists(subscription_id))
                 {
-                    return NotFound();
+                    return NotFound("subscription does not exist");
                 }
                 else
                 {

@@ -35,7 +35,7 @@ namespace NetflixAPI.Controllers
 
             if (watchableContent == null)
             {
-                return NotFound();
+                return NotFound("watchable content does not exist");
             }
 
             return watchableContent;
@@ -48,7 +48,7 @@ namespace NetflixAPI.Controllers
         {
             if (content_id != watchableContent.content_id)
             {
-                return BadRequest();
+                return BadRequest("ID does not match with watchable content");
             }
 
             _context.Entry(watchableContent).State = EntityState.Modified;
@@ -61,7 +61,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!WatchableContentExists(content_id))
                 {
-                    return NotFound();
+                    return NotFound("watchable content does not exist");
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace NetflixAPI.Controllers
             var watchableContent = await _context.WatchableContent_1.FindAsync(content_id);
             if (watchableContent == null)
             {
-                return NotFound();
+                return NotFound("watchable content does not exist");
             }
 
             _context.WatchableContent_1.Remove(watchableContent);
