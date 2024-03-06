@@ -100,14 +100,15 @@ namespace NetflixAPI.Controllers
                 return BadRequest("Invalid email address, please check your input");
             }
 
-            var users = _context.User.ToList();
-
-            foreach(User dbUser in users)
+            if(!ModelState.IsValid)
             {
-                if(user.email.Equals(dbUser.email))
-                {
-                    return Conflict("User already exists");
-                }
+                return BadRequest("Some required input fields are missing");
+            }
+
+            if(EmailExists(user.email))
+            {
+                // Saying email does/does not exist allows for datamining
+                return Conflict("Email or password is invalid");
             }
 
             _context.User.Add(user);
@@ -127,27 +128,24 @@ namespace NetflixAPI.Controllers
             {
                 return BadRequest("Invalid email");
             }
-
-            var users = _context.User.ToList();
-            foreach(User dbUser in users)
+            
+            if(EmailExists(loginUser.email))
             {
-                if(loginUser.email == dbUser.email)
+                var dbUser = _context.User.Single(u => u.email == loginUser.email);
+                var loginAttempts = _context.User.Where(u => u.email == loginUser.email).ToList();
+
+                if(loginAttempts.Count >= 3)
                 {
-                    var loginAttempts = _context.User.Where(u => u.email == dbUser.email).ToList();
+                    return StatusCode(423, "User account is locked due to consecutive login failures");
+                }
 
-                    if(loginAttempts.Count >= 3)
-                    {
-                        return StatusCode(423, "User account is locked due to consecutive login failures");
-                    }
-
-                    if(loginUser.password_hash == dbUser.password_hash) // add authorization later
-                    {
-                        return Ok(CreateToken(dbUser, "Admin"));
-                    }
-                    else
-                    {
-                        return StatusCode(401, "password does not match");
-                    }
+                if(loginUser.password_hash == dbUser.password_hash) // add authorization later
+                {
+                    return Ok(CreateToken(dbUser, "Admin"));
+                }
+                else
+                {
+                    Unauthorized("Login failed, invalid email or password");
                 }
             }
 
@@ -175,6 +173,11 @@ namespace NetflixAPI.Controllers
         private bool UserExists(int user_id)
         {
             return _context.User.Any(e => e.user_id == user_id);
+        }
+
+        private bool EmailExists(string user_email)
+        {
+            return _context.User.Any(dbUser => dbUser.email==user_email);
         }
 
         private string CreateToken(User user, string role)
