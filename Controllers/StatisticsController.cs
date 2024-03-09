@@ -31,9 +31,9 @@ namespace NetflixAPI.Controllers
         // GET: statistics/subscriptions/users
         [HttpGet]
         [Route("statistics/subscriptions/users")]
-        public async Task<ActionResult<IEnumerable<SubscriptionUserView>>> GetStatistics()
+        public async Task<ActionResult<IEnumerable<SubscriptionsUserView>>> GetStatistics()
         {
-            return await _context.SubscriptionUserView.ToListAsync();
+            return await _context.SubscriptionsUserView.ToListAsync();
         }
 
         // GET: statistics/revenue/daily

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 namespace NetflixAPI.Models;
 
 [PrimaryKey(nameof(subscription_id), nameof(user_id))]
-public partial class SubscriptionUserView()
+public partial class SubscriptionsUserView()
 {
 
     public required int subscription_id {get; set;}

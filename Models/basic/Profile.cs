@@ -10,6 +10,6 @@ public partial class Profile
     public int user_id {get; set;}
     public required string name {get; set;}
     public string? profile_image {get; set;}
-    public required DateTime DateOfBirth {get; set;} 
+    public required DateTime date_of_birth {get; set;} 
     
 }
