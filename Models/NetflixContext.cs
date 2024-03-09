@@ -61,7 +61,7 @@ public DbSet<NetflixAPI.Models.SubtitleContent> SubtitleContent_1 { get; set; } 
 
         base.OnModelCreating(modelBuilder);
         modelBuilder
-            .Entity<SubscriptionUserView>()
-            .ToView("SubscriptionUserView");
+            .Entity<SubscriptionsUserView>()
+            .ToView("SubscriptionsUserView");
     }
 }

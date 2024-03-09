@@ -39,7 +39,7 @@ namespace NetflixAPI.Controllers
 
             if (subtitleContent == null)
             {
-                return NotFound("subtitle does not exist");
+                return NotFound("Subtitle does not exist");
             }
 
             return subtitleContent;
@@ -65,7 +65,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!SubtitleContentExists(subtitle_id))
                 {
-                    return NotFound("subtitle does not exist");
+                    return NotFound("Subtitle does not exist");
                 }
                 else
                 {
@@ -81,6 +81,15 @@ namespace NetflixAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<SubtitleContent>> PostSubtitleContent(SubtitleContent subtitleContent)
         {
+
+            var episode = _context.Episode.FindAsync(subtitleContent.episode_id);
+            var language = _context.Episode.FindAsync(subtitleContent.language_id);
+
+            if(language == null || episode == null)
+            {
+                return BadRequest("Invalid episode or language ID");
+            }
+
             _context.SubtitleContent_1.Add(subtitleContent);
             await _context.SaveChangesAsync();
 
@@ -94,7 +103,7 @@ namespace NetflixAPI.Controllers
             var subtitleContent = await _context.SubtitleContent_1.FindAsync(subtitle_id);
             if (subtitleContent == null)
             {
-                return NotFound("subtitle does not exist");
+                return NotFound("Subtitle does not exist");
             }
 
             _context.SubtitleContent_1.Remove(subtitleContent);
