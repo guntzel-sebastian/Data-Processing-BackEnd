@@ -121,7 +121,7 @@ namespace NetflixAPI.Controllers
                 return BadRequest(e);
             }
 
-            return CreatedAtAction(nameof(GetUser), new { user_id = user.user_id }, user);
+            return Created("User successfully registered");
         }
 
 
