@@ -13,10 +13,12 @@ using NetflixAPI.Models;
 using NuGet.Common;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NetflixAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     public class StatisticsController : ControllerBase
     {
         private readonly NetflixContext _context;

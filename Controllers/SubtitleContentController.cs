@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace NetflixAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SubtitleContentController : ControllerBase
     {
         private readonly NetflixContext _context;
@@ -22,6 +24,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/SubtitleContent
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<SubtitleContent>>> GetSubtitleContent_1()
         {
             return await _context.SubtitleContent_1.ToListAsync();
@@ -29,6 +32,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/SubtitleContent/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<SubtitleContent>> GetSubtitleContent(int id)
         {
             var subtitleContent = await _context.SubtitleContent_1.FindAsync(id);

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace NetflixAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClassificationController : ControllerBase
     {
         private readonly NetflixContext _context;
@@ -22,6 +24,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Classification
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Classification>>> GetClassification()
         {
             return await _context.Classification.ToListAsync();
@@ -29,6 +32,7 @@ namespace NetflixAPI.Controllers
 
         // GET: api/Classification/5
         [HttpGet("{classification_id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Classification>> GetClassification(int classification_id)
         {
             var classification = await _context.Classification.FindAsync(classification_id);
