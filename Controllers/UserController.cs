@@ -111,8 +111,15 @@ namespace NetflixAPI.Controllers
                 return Conflict("Email or password is invalid");
             }
 
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.User.Add(user);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e);
+            }
 
             return CreatedAtAction(nameof(GetUser), new { user_id = user.user_id }, user);
         }

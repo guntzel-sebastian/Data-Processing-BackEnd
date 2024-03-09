@@ -12,6 +12,6 @@ public partial class Episode
     public int season_id { get; set; }
     public required string episode_name { get; set; }
     public int content_index { get; set; }
-    public required int length { get; set; }
+    public required double length { get; set; }
 
 }

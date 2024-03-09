@@ -22,7 +22,7 @@ public partial class WatchableContent : IValidator
     public bool Validate()
     {
 
-        if(cover_image.IndexOfAny(Path.GetInvalidPathChars()) == -1)
+        if(cover_image.IndexOfAny(Path.GetInvalidPathChars()) != -1)
         {
             return false;
         }

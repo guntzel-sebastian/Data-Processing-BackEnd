@@ -27,7 +27,14 @@ namespace NetflixAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Classification>>> GetClassification()
         {
-            return await _context.Classification.ToListAsync();
+            var response = await _context.Classification.ToListAsync();
+
+            if(!response.Any())
+            {
+                return NotFound("No classifications exist");
+            }
+
+            return response;
         }
 
         // GET: api/Classification/5
@@ -37,9 +44,9 @@ namespace NetflixAPI.Controllers
         {
             var classification = await _context.Classification.FindAsync(classification_id);
 
-            if (classification == null)
+            if (!classification.Any())
             {
-                return NotFound("classification does not exist");
+                return NotFound("Classification does not exist");
             }
 
             return classification;
@@ -81,6 +88,12 @@ namespace NetflixAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Classification>> PostClassification(Classification classification)
         {
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest("Some required input fields are missing");
+            }
+
             _context.Classification.Add(classification);
             await _context.SaveChangesAsync();
 
