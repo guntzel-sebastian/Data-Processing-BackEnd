@@ -44,7 +44,7 @@ namespace NetflixAPI.Controllers
         {
             var classification = await _context.Classification.FindAsync(classification_id);
 
-            if (!classification.Any())
+            if (classification == null)
             {
                 return NotFound("Classification does not exist");
             }
