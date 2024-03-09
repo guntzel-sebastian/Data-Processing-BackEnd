@@ -39,7 +39,7 @@ namespace NetflixAPI.Controllers
 
             if (watchableContent == null)
             {
-                return NotFound("watchable content does not exist");
+                return NotFound("Watchable content does not exist");
             }
 
             return watchableContent;
@@ -65,7 +65,7 @@ namespace NetflixAPI.Controllers
             {
                 if (!WatchableContentExists(content_id))
                 {
-                    return NotFound("watchable content does not exist");
+                    return NotFound("Watchable content does not exist");
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace NetflixAPI.Controllers
             var watchableContent = await _context.WatchableContent_1.FindAsync(content_id);
             if (watchableContent == null)
             {
-                return NotFound("watchable content does not exist");
+                return NotFound("Watchable content does not exist");
             }
 
             _context.WatchableContent_1.Remove(watchableContent);
