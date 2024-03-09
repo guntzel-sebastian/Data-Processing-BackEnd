@@ -133,7 +133,7 @@ namespace NetflixAPI.Controllers
 
             if(!loginUser.Validate())
             {
-                return BadRequest("Invalid email");
+                return BadRequest("Email format is wrong");
             }
             
             if(EmailExists(loginUser.email))
@@ -150,13 +150,9 @@ namespace NetflixAPI.Controllers
                 {
                     return Ok(CreateToken(dbUser, "Admin"));
                 }
-                else
-                {
-                    Unauthorized("Login failed, invalid email or password");
-                }
             }
 
-            return NotFound("User does not exist");
+            return Unauthorized("Login failed, invalid email or password");
                         
         }
         
