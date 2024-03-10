@@ -29,11 +29,6 @@ namespace NetflixAPI.Controllers
         {
             var response = await _context.Classification.ToListAsync();
 
-            if(!response.Any())
-            {
-                return NotFound("No classifications exist");
-            }
-
             return response;
         }
 

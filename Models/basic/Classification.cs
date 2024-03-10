@@ -8,6 +8,7 @@ public partial class Classification
     }
 
     public int classification_id {get; set;}
-    public required int age_rating {get; set;}
+    public required string description {get; set;}
+    public int? age_rating {get; set;}
 
 }

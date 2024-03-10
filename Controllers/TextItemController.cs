@@ -39,7 +39,7 @@ namespace NetflixAPI.Controllers
 
             if (textItem == null)
             {
-                return NotFound("text item not found");
+                return NotFound("Text item not found");
             }
 
             return textItem;
