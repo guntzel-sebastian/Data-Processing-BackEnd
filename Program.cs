@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Text;
 using System.Configuration;
 using System.Globalization;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,10 +40,6 @@ builder.Services.AddDbContext<NetflixContext>(opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
-builder.Services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
 
 var app = builder.Build();
 
