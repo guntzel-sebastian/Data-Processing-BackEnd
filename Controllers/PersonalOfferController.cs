@@ -43,22 +43,6 @@ namespace NetflixAPI.Controllers
             return personalOffer;
         }
 
-        // DELETE: api/PersonalOffer/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePersonalOffer(int id)
-        {
-            var personalOffer = await _context.WatchableContent.FindAsync(id);
-            if (personalOffer == null)
-            {
-                return NotFound("Offer does not exist");
-            }
-
-            _context.WatchableContent.Remove(personalOffer);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
         private bool PersonalOfferExists(int id)
         {
             return _context.WatchableContent.Any(e => e.content_id == id);
