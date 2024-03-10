@@ -28,7 +28,7 @@ public class NetflixContext : DbContext
     public DbSet<TextItem> TextItem { get; set; } = null!;
     public DbSet<Classification> Classification { get; set; } = null!;
     public DbSet<APIKey> APIKey { get; set; } = null!;
-    public DbSet<SubscriptionUserView> SubscriptionUserView { get; set; } = null!;
+    public DbSet<SubscriptionsUserView> SubscriptionsUserView { get; set; } = null!;
     public DbSet<GetTotalDailyRevenue> GetTotalDailyRevenue { get; set; } = null!;
 
 public DbSet<NetflixAPI.Models.WatchableContent> WatchableContent_1 { get; set; } = default!;

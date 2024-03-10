@@ -92,7 +92,7 @@ namespace NetflixAPI.Controllers
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public async Task<ActionResult<User>> UserRegister(User user)
+        public async Task<IActionResult> UserRegister(User user)
         {
 
             if(!user.Validate())
@@ -121,7 +121,7 @@ namespace NetflixAPI.Controllers
                 return BadRequest(e);
             }
 
-            return Created("User successfully registered");
+            return StatusCode(201, "User successfully registered");
         }
 
 
